@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "24672F18-B089-4531-A94C-B5EA7CC1AD2D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "SpaceFoundationTests",
+        "SpaceFoundationTests\/testExample()"
+      ],
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SpaceFoundationTests",
+        "name" : "SpaceFoundationTests"
+      }
+    }
+  ],
+  "version" : 1
+}
