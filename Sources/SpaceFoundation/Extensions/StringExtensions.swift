@@ -24,7 +24,7 @@ extension String {
     }
     
     func dollarValue() -> Double? {
-        var repalce: String = self.replacingOccurrences(of: "$", with: "")
+        let repalce: String = self.replacingOccurrences(of: "$", with: "")
         return repalce.toDouble()
     }
 }
@@ -49,5 +49,47 @@ extension Int {
     
     func toDollars() -> String {
         "$ " + self.toString()
+    }
+}
+
+
+public extension String {
+    
+    private struct Constants {
+        static let alphabets: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        static let specialChar: String = "+_@.-"
+        static let numeric: String = "0123456789"
+        static let emailRegEx = "[A-Z0-9a-z_%+-]+@[A-Za-z0-9.-]+\\|.[A-Za-z]{2, 64}"
+        
+        static let numericCharacterSet: CharacterSet = CharacterSet(charactersIn: numeric)
+        static let alphaNumericCharacterSet: CharacterSet = CharacterSet(charactersIn: alphabets + numeric)
+        static let specialAlphaNumericCharacterSet: CharacterSet = CharacterSet(charactersIn: alphabets + numeric + specialChar)
+    }
+    
+    func checkNumeric() -> Bool {
+        let inputCharacterSet: CharacterSet = CharacterSet(charactersIn: self)
+        return Constants.numericCharacterSet.isSuperset(of: inputCharacterSet)
+    }
+    
+    func specialCharacters() -> Bool {
+        let inputCharacterSet: CharacterSet = CharacterSet(charactersIn: self)
+        return Constants.specialAlphaNumericCharacterSet.isSuperset(of: inputCharacterSet)
+    }
+    
+    func checkAlphaNumeric() -> Bool {
+        let inputCharacterSet: CharacterSet = CharacterSet(charactersIn: self)
+        return Constants.alphaNumericCharacterSet.isSuperset(of: inputCharacterSet)
+    }
+    
+    func checkLength(min: Int, max: Int) -> Bool {
+        self.count >= min && self.count < max
+    }
+    
+    func checkMaxLength(max: Int) -> Bool {
+        self.count < max
+    }
+    
+    func checkMinLength(min: Int) -> Bool {
+        self.count >= min
     }
 }

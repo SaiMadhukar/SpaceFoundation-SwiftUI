@@ -6,10 +6,19 @@
 //
 
 import Foundation
+import SwiftUI
 
-class ColorStyles {
+public class ColorStyles {
     
-    init() {
-        
+    public init() {}
+    
+    public var background: Color {
+        return Color.red.opacity(0.75)
+    }
+}
+
+#Preview {
+    VStack {
+        Text("Login")
     }
 }
