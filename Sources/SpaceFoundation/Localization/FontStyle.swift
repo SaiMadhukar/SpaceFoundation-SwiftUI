@@ -74,21 +74,21 @@ public enum FontCategory {
     }
 }
 
-public struct FontStyle: ViewModifier {
+public struct FontStyleModifier: ViewModifier {
     
     private var category: FontCategory
     private var weight: Font.Weight
     private var color: Color
     
-    public init(category: FontCategory = .body, weight: Font.Weight = .regular, customColor: Color = .clear) {
+    public init(category: FontCategory = .body, weight: Font.Weight = .regular, color: Color = .clear) {
         self.category = category
         self.weight = weight
-        self.color = customColor == .clear ? category.fontColor : customColor
+        self.color = color == .clear ? category.fontColor : color
     }
     
     public func body(content: Content) -> some View {
         content
             .font(.system(size: category.size, weight: weight))
-            .foregroundColor(category.fontColor)
+            .foregroundColor(color)
     }
 }

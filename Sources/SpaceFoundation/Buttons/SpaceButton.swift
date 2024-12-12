@@ -7,52 +7,6 @@
 
 import SwiftUI
 
-public struct SpaceButtonConfiguration {
-    
-    var cornerRadius: CGFloat
-    var shadow: Bool
-    var borderWidth: CGFloat
-    var borderColor: Color
-    var backgroundColor: Color
-    var textColor: Color
-    var font: Font
-    
-    var animationEffect: Bool
-    var animation: Animation
-    var standardScale: CGFloat
-    var animatedScale: CGFloat
-    
-    public init(
-        cornerRadius: CGFloat = 10,
-        shadow: Bool = false,
-        borderWidth: CGFloat = 1,
-        borderColor: Color = .clear,
-        backgroundColor: Color = .blue,
-        textColor: Color = .primary,
-        animationEffect: Bool = true,
-        animation: Animation = .snappy(duration: 0.25),
-        standardScale: CGFloat = 1.0,
-        animatedScale: CGFloat = 0.65,
-        font: Font = Font.system(size: 22, weight: .bold)
-    ) {
-        self.cornerRadius = cornerRadius
-        self.shadow = shadow
-        self.borderWidth = borderWidth
-        self.borderColor = borderColor
-        self.backgroundColor = backgroundColor
-        self.textColor = textColor
-        self.animationEffect = animationEffect
-        self.animation = animation
-        self.standardScale = standardScale
-        self.animatedScale = animatedScale
-        self.font = font
-    }
-}
-
-
-
-
-
 public struct SpaceButton: View {
     
     @State private var title: String
@@ -61,7 +15,7 @@ public struct SpaceButton: View {
     @State private var configuration: SpaceButtonConfiguration
     
     public init(title: String,
-                configuration: SpaceButtonConfiguration = SpaceButtonDefaults.primary,
+                configuration: SpaceButtonConfiguration = .primary,
                 action: @escaping () -> Void) {
         _title = State(initialValue: title)
         self.action = action
@@ -80,22 +34,22 @@ public struct SpaceButton: View {
 #Preview {
     ZStack {
         VStack(spacing: 32) {
-            SpaceButton(title: "Submit", configuration: SpaceButtonDefaults.primary) {
+            SpaceButton(title: "Submit", configuration: .primary) {
                 print("Submit")
             }
             .padding(.bottom, 16)
             
-            SpaceButton(title: "Submit", configuration: SpaceButtonDefaults.secondary) {
+            SpaceButton(title: "Submit", configuration: .secondary) {
                 print("Submit")
             }
             .padding(.bottom, 16)
             
-            SpaceButton(title: "Submit", configuration: SpaceButtonDefaults.tertiary) {
+            SpaceButton(title: "Submit", configuration: .tertiary) {
                 print("Submit")
             }
             .padding(.bottom, 16)
             
-            SpaceButton(title: "Submit", configuration: SpaceButtonDefaults.plain) {
+            SpaceButton(title: "Submit", configuration: .plain) {
                 print("Submit")
             }
             .padding(.bottom, 16)

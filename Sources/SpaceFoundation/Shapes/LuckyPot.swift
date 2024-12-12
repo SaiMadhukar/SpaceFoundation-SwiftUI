@@ -35,6 +35,10 @@ public class BubbleModel: ObservableObject {
         }
     }
     
+    func reset() {
+        
+    }
+    
     func addMore() {
         for i in Range(0...50) {
             
@@ -66,7 +70,7 @@ public struct LuckyPot: View {
     
     public var body: some View {
         VStack {
-            TimelineView(.animation(minimumInterval: 2, paused: false)) { context in
+            TimelineView(.animation(minimumInterval: 200, paused: false)) { context in
                 
                 ForEach(bubbleModel.data, id: \.id) { model in
                     Bubble(model: model,
@@ -74,13 +78,9 @@ public struct LuckyPot: View {
                                isPopped: $isPopped
                     )
                         .onAppear {
-                            withAnimation(.linear(duration: 8).repeatForever()) {
+                            withAnimation(.linear(duration: 4).repeatForever(autoreverses: false)) {
+                                print(bubbleModel.data.count)
                                 moveToOffSet = true
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-                                    isPopped.toggle()
-                                    bubbleModel.addMore()
-                                }
                             }
                         }
                 }

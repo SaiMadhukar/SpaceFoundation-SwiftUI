@@ -20,20 +20,20 @@ public struct CircleView: View {
     
     @State private var circleControl = CircleControl()
     private var gradient: AngularGradient = AngularGradient(
-        gradient: Gradient(colors: [Color.blue.opacity(0.65), .white]),
+        gradient: Gradient(colors: [Color.blue.opacity(0.70), .clear]),
         center: .center,
         startAngle: .degrees(0),
-        endAngle: .degrees(360)
+        endAngle: .degrees(400)
     )
     
     public init() {}
     
     public var body: some View {
         VStack {
-            
             ZStack {
                 Circle()
                     .fill(gradient)
+                    .rotationEffect(.degrees(Double(circleControl.rotationDegress)))
                     .frame(width: width, height: height)
                     .mask {
                         strokePath
@@ -43,8 +43,8 @@ public struct CircleView: View {
             knobView
         }
         .onAppear(perform: {
-            withAnimation(.linear(duration: 4.0)) {
-                circleControl.rotationDegress = 340
+            withAnimation(.linear(duration: 4.0).repeatForever(autoreverses: false)) {
+                circleControl.rotationDegress = 360
             }
         })
     }

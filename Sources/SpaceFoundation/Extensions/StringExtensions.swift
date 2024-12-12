@@ -29,6 +29,12 @@ extension String {
     }
 }
 
+extension Optional {
+    
+    var isNil: Bool {
+        self == nil
+    }
+}
 
 extension Double {
     

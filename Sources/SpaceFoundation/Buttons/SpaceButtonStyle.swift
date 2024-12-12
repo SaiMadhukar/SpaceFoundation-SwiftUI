@@ -16,6 +16,7 @@ public struct SpaceButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
+            .frame(width: userConfig.width, height: userConfig.height)
             .foregroundColor(userConfig.textColor)
             .font(userConfig.font)
             .background(userConfig.backgroundColor)

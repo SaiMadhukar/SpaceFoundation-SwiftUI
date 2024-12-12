@@ -19,4 +19,8 @@ extension Color {
         gradient: Gradient(colors: [Color.green.opacity(0.45), Color.orange.opacity(0.45)]),
         center: .center
     )
+    
+    var UiColor: UIColor {
+        UIColor(self)
+    }
 }

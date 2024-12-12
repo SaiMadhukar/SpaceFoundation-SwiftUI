@@ -36,7 +36,7 @@ public struct CapsuleButton: View {
     
     private var title: String
     private var action: (() -> Void)?
-    @State var clickedState: Bool = true
+    @State var clickedState: Bool = false
     
     public init(title: String, action: (() -> Void)? = nil) {
         self.title = title
@@ -44,31 +44,27 @@ public struct CapsuleButton: View {
     }
     
     public var body: some View {
-        
-        
-        SpaceButton(title: title,
-                    configuration: SpaceButtonDefaults.primary, action: {
-            action?()
-        })
-        .frame(width: 200, height: 200)
-            .background(
-                Circle()
-                   .fill(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .top, endPoint: .bottom))
+        Circle()
+           .fill(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .top, endPoint: .bottom))
+           .scaleEffect(clickedState ? 1 : 0.65)
+            .frame(width: 200, height: 200)
+            .onLongPressGesture(minimumDuration: 0.1, pressing: { pressing in
+                withAnimation(.snappy(duration: 0.25)) {
+                    clickedState = pressing
+                }
+                action?()
+            }, perform: {})
+            .overlay(
+                Text(title)
+                    .textStyle(.heading)
+                    .scaleEffect(clickedState ? 1 : 0.65)
             )
-            
-    }
-    
-    public var buttonView: some View {
-        SpaceButton(title: title,
-                    configuration: SpaceButtonDefaults.primary, action: {
-            action?()
-        })
     }
 }
 
 
 #Preview {
-    CapsuleButton(title: "Good") {
-        print("Good")
+    CapsuleButton(title: "Good2") {
+        print("Good2")
     }
 }
