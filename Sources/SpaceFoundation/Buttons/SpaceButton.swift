@@ -9,25 +9,23 @@ import SwiftUI
 
 public struct SpaceButton: View {
     
-    @State private var title: String
-    @State private var action: () -> Void
-    @State private var cornerRadius: CGFloat = 10
-    @State private var configuration: SpaceButtonConfiguration
+    private var title: String
+    private var configuration: SpaceButtonConfiguration
+    private var action: (() -> Void)?
     
     public init(title: String,
                 configuration: SpaceButtonConfiguration = .primary,
                 action: @escaping () -> Void) {
-        _title = State(initialValue: title)
+        self.title = title
         self.action = action
         self.configuration = configuration
     }
     
     public var body: some View {
         Button(title, action: {
-           action()
+           action?()
         })
         .buttonStyle(SpaceButtonStyle(userConfig: configuration))
-        .frame(width: 200, height: 30)
     }
 }
 

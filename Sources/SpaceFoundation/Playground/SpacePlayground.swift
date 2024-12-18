@@ -18,6 +18,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case buttonStyles = "Button Styles"
     case textStyles = "Text Styles"
     case inputFields = "Input Fields"
+    case spaceCharts = "Space Charts"
     
     public var name: String {
         self.rawValue
@@ -31,6 +32,7 @@ public enum Tools: String, Identifiable, CaseIterable {
 public struct SpacePlayground: View {
     
     private var all: [Tools] = Tools.allCases
+    private let playgroundMock: PlaygroundMock = PlaygroundMock()
     @State private var selectedTool: Tools?
     
     // Accessory Variables
@@ -75,6 +77,9 @@ public struct SpacePlayground: View {
             }
         case .inputFields:
             textInput()
+        case .spaceCharts:
+            let viewModel: SpaceChartViewModel = SpaceChartViewModel(data: playgroundMock.chartMock)
+            SpaceChart(viewModel: viewModel)
         default:
             EmptyView()
         }
@@ -95,10 +100,7 @@ public struct SpacePlayground: View {
     func textInput() -> some View {
         VStack {
             Spacer()
-            let usernameState: TextInputState = .init(text: "", title: "Username", type: .username, placeholder: "Enter username", scaleEffect: false, showCloaseButton: true, reqSecureField: false)
-            
-            TextInput(state: usernameState)
-            
+            TextInput(state: playgroundMock.usernameState)
             Spacer()
         }
         .background(Color.linearGradient)
@@ -134,4 +136,18 @@ public struct SpacePlayground: View {
     VStack {
         SpacePlayground()
     }
+}
+
+
+struct PlaygroundMock {
+    
+    let chartMock: [ChartModel] = .init([
+        ChartModel(x: "Jan", y: 1000),
+        ChartModel(x: "Feb", y: 1600),
+        ChartModel(x: "Mar", y: 2000),
+        ChartModel(x: "Apr", y: 2200),
+        ChartModel(x: "May", y: 1200)
+    ])
+    
+    let usernameState: TextInputState = .init(text: "", title: "Username", type: .username, placeholder: "Enter username", scaleEffect: false, showCloaseButton: true, reqSecureField: false)
 }

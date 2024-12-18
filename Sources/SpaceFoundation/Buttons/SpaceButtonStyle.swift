@@ -11,7 +11,7 @@ import SwiftUI
 public struct SpaceButtonStyle: ButtonStyle {
     
     @State private var isPressed = false
-    @State var userConfig: SpaceButtonConfiguration
+    var userConfig: SpaceButtonConfiguration
     
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
