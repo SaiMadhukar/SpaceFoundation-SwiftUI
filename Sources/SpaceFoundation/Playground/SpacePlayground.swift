@@ -11,6 +11,8 @@ import Foundation
 
 public enum Tools: String, Identifiable, CaseIterable {
     
+    case gradientColors = "Gradient Colors"
+    case spaceCharts = "Space Charts"
     case calendar = "Calendar View"
     case luckyPot = "Lukcy Pot"
     case circleView = "Circle View"
@@ -18,7 +20,6 @@ public enum Tools: String, Identifiable, CaseIterable {
     case buttonStyles = "Button Styles"
     case textStyles = "Text Styles"
     case inputFields = "Input Fields"
-    case spaceCharts = "Space Charts"
     
     public var name: String {
         self.rawValue
@@ -43,18 +44,20 @@ public struct SpacePlayground: View {
     
     public var body: some View {
         NavigationStack {
-            ForEach(all) { tool in
-                NavigationLink(
-                    destination: destinationFor(tool: tool),
-                    label: {
-                        Text(tool.name)
-                            .textStyle(.headingSmall)
-                            .foregroundColor(.white)
-                            .frame(width: 300, height: 40)
-                            .padding()
-                            .background(Color.green.opacity(0.45))
-                            .clipShape(RoundedRectangle(cornerRadius: 20.0))
-                })
+            ScrollView {
+                ForEach(all) { tool in
+                    NavigationLink(
+                        destination: destinationFor(tool: tool),
+                        label: {
+                            Text(tool.name)
+                                .textStyle(.headingSmall)
+                                .foregroundColor(.white)
+                                .frame(width: 300, height: 40)
+                                .padding()
+                                .background(Color.green.opacity(0.45))
+                                .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                    })
+                }
             }
         }
         .navigationBarTitle("Space Playground")
@@ -80,9 +83,57 @@ public struct SpacePlayground: View {
         case .spaceCharts:
             let viewModel: SpaceChartViewModel = SpaceChartViewModel(data: playgroundMock.chartMock)
             SpaceChart(viewModel: viewModel)
+        case .gradientColors:
+            gradeintView()
         default:
             EmptyView()
         }
+    }
+    
+    
+    func gradeintView() -> some View {
+        ScrollView {
+            HStack {
+                Circle()
+                    .fill(SpaceGradient.blueLightRadial.rStyle())
+                    .frame(width: 200, height: 200)
+                    .shadow(color: .black.opacity(0.25) ,radius: 4)
+                    
+                Circle()
+                    .fill(SpaceGradient.greenOrangeLinear.lStyle())
+                    .frame(width: 150, height: 150)
+                    .shadow(color: .black.opacity(0.25) ,radius: 4)
+            }
+            .padding(.horizontal, 16)
+          
+            HStack {
+                Circle()
+                    .fill(SpaceGradient.goldLightRadial.rStyle())
+                    .frame(width: 200, height: 200)
+                    .shadow(color: .black.opacity(0.25) ,radius: 4)
+                
+                
+                Circle()
+                    .fill(SpaceGradient.greenOrangeLinear.rStyle())
+                    .frame(width: 150, height: 150)
+                    .shadow(color: .black.opacity(0.25) ,radius: 4)
+            }
+            .padding(.horizontal, 16)
+            
+            HStack {
+                Circle()
+                    .fill(SpaceGradient.greenOrangeLinear.rStyle())
+                    .frame(width: 200, height: 200)
+                    .shadow(color: .black.opacity(0.25) ,radius: 4)
+                
+                Circle()
+                    .fill(SpaceGradient.purpleBlueLinear.rStyle())
+                    .frame(width: 150, height: 150)
+                    .shadow(color: .black.opacity(0.25) ,radius: 4)
+            }
+            .padding(.horizontal, 16)
+        }
+        .frame(height: 800, alignment: .center)
     }
     
     func calendarView() -> some View {

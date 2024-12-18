@@ -14,6 +14,7 @@ public enum SpaceGradient: String {
     case goldLightRadial
     case purpleGoldRadial
     case greenOrangeLinear
+    case purpleBlueLinear
     
     var colorMix: [Color] {
         switch self {
@@ -25,6 +26,8 @@ public enum SpaceGradient: String {
             return [Color(hex: "EF7D2B"), Color(hex: "C6696F"), Color(hex: "6A46CE")]
         case .greenOrangeLinear:
             return [Color(hex: "008000", opacity: 0.45), Color(hex: "FFA500", opacity: 0.45)]
+        case .purpleBlueLinear:
+            return [Color(hex: "5757FB", opacity: 0.45), Color(hex: "2A7FCF", opacity: 0.70)]
         }
     }
     
@@ -50,7 +53,8 @@ public enum SpaceGradient: String {
         return RadialGradient(gradient: Gradient(stops: stops), center: .topLeading, startRadius: startRadius, endRadius: endRadius)
     }
     
-    public func lStyle(start: UnitPoint = .topLeading, end: UnitPoint = .bottomTrailing) -> LinearGradient {
+    public func lStyle(start: UnitPoint = .topLeading,
+                       end: UnitPoint = .bottomTrailing) -> LinearGradient {
         LinearGradient(colors: colorMix, startPoint: start, endPoint: end)
     }
 }
@@ -89,6 +93,11 @@ public enum SpaceGradient: String {
             Circle()
                 .fill(SpaceGradient.greenOrangeLinear.rStyle())
                 .frame(width: 200, height: 200)
+                .shadow(color: .black.opacity(0.25) ,radius: 4)
+            
+            Circle()
+                .fill(SpaceGradient.purpleBlueLinear.rStyle())
+                .frame(width: 150, height: 150)
                 .shadow(color: .black.opacity(0.25) ,radius: 4)
         }
         .padding(.horizontal, 16)
