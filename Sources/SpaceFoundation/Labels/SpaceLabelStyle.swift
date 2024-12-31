@@ -17,7 +17,7 @@ public struct SpaceLabelStyle: LabelStyle {
             .padding()
             .frame(width: userConfig.width, height: userConfig.height)
             .foregroundColor(userConfig.textColor)
-            .font(userConfig.font)
+            .font(userConfig.fontCategory.font)
             .background(userConfig.backgroundColor)
             .cornerRadius(userConfig.cornerRadius)
             .scaleEffect(action && userConfig.animationEffect ? userConfig.animatedScale : userConfig.standardScale)
@@ -35,7 +35,7 @@ public struct SpaceLabelConfiguration {
     var borderColor: Color
     var backgroundColor: Color
     var textColor: Color
-    var font: Font
+    var fontCategory: FontCategory
     var icon: String?
     
     var animationEffect: Bool
@@ -45,6 +45,22 @@ public struct SpaceLabelConfiguration {
     
     var width: CGFloat = 200
     var height: CGFloat = 50
+    
+    public static var space:
+        SpaceLabelConfiguration {
+            SpaceLabelConfiguration(
+                cornerRadius: 10,
+                shadow: false,
+                borderWidth: 1, borderColor: .clear,
+                backgroundColor: .clear,
+                textColor: .primary,
+                animationEffect: true,
+                animation: .snappy(duration: 0.25),
+                standardScale: 1.0,
+                animatedScale: 0.65,
+                fontCategory: FontCategory.spaceFont
+            )
+    }
     
     public static var primary:
         SpaceLabelConfiguration {
@@ -58,7 +74,7 @@ public struct SpaceLabelConfiguration {
                 animation: .snappy(duration: 0.25),
                 standardScale: 1.0,
                 animatedScale: 0.65,
-                font: FontCategory.body.font
+                fontCategory: FontCategory.bodyMedium
             )
     }
     
@@ -74,7 +90,7 @@ public struct SpaceLabelConfiguration {
                 animation: .snappy(duration: 0.25),
                 standardScale: 1.0,
                 animatedScale: 0.65,
-                font: FontCategory.body.font
+                fontCategory: FontCategory.body
             )
     }
     
@@ -90,7 +106,7 @@ public struct SpaceLabelConfiguration {
                 animation: .snappy(duration: 0.25),
                 standardScale: 1.0,
                 animatedScale: 0.65,
-                font: FontCategory.body.font
+                fontCategory: FontCategory.body
             )
     }
     
@@ -106,7 +122,7 @@ public struct SpaceLabelConfiguration {
                 animation: .snappy(duration: 0.25),
                 standardScale: 1.0,
                 animatedScale: 1.2,
-                font: FontCategory.headingLarge.font
+                fontCategory: FontCategory.headingLarge
             )
     }
     
@@ -121,7 +137,7 @@ public struct SpaceLabelConfiguration {
         animation: Animation = .snappy(duration: 0.25),
         standardScale: CGFloat = 1.0,
         animatedScale: CGFloat = 0.65,
-        font: Font = Font.system(size: 22, weight: .bold)
+        fontCategory: FontCategory = FontCategory.body
     ) {
         self.cornerRadius = cornerRadius
         self.shadow = shadow
@@ -133,7 +149,7 @@ public struct SpaceLabelConfiguration {
         self.animation = animation
         self.standardScale = standardScale
         self.animatedScale = animatedScale
-        self.font = font
+        self.fontCategory = fontCategory
     }
 }
 

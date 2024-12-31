@@ -18,14 +18,14 @@ public struct SpaceButtonStyle: ButtonStyle {
             .padding()
             .frame(width: userConfig.width, height: userConfig.height)
             .foregroundColor(userConfig.textColor)
-            .font(userConfig.font)
+            .font(userConfig.fontCategory.font)
             .background(userConfig.backgroundColor)
             .cornerRadius(userConfig.cornerRadius)
-            .scaleEffect(isPressed && userConfig.animationEffect ? userConfig.animatedScale : userConfig.standardScale)
-            .onLongPressGesture(minimumDuration: 0.1, pressing: { pressing in
-                withAnimation(userConfig.animation) {
-                    isPressed = pressing
-                }
-            }, perform: {})
+//            .scaleEffect(isPressed && userConfig.animationEffect ? userConfig.animatedScale : userConfig.standardScale)
+//            .onLongPressGesture(minimumDuration: 0.1, pressing: { pressing in
+//                withAnimation(userConfig.animation) {
+//                    isPressed = pressing
+//                }
+//            }, perform: {})
     }
 }

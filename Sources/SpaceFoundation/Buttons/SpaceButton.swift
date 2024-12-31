@@ -53,6 +53,6 @@ public struct SpaceButton: View {
             .padding(.bottom, 16)
         }
     }
-    .frame(width: 400, height: 900)
+    .frame(width: 450, height: 900)
     .background(Color.linearGradient)
 }

@@ -10,13 +10,13 @@ import SwiftUI
 extension Color {
     
     public static let linearGradient: LinearGradient = LinearGradient(
-        gradient: Gradient(colors: [Color.green.opacity(0.45), Color.orange.opacity(0.45)]),
+        gradient: Gradient(colors: [SpaceColors.green45, SpaceColors.orange45]),
         startPoint: .top,
         endPoint: .bottom
     )
     
     public static let angularGradient: AngularGradient = AngularGradient(
-        gradient: Gradient(colors: [Color.green.opacity(0.45), Color.orange.opacity(0.45)]),
+        gradient: Gradient(colors: [SpaceColors.green45, SpaceColors.orange45]),
         center: .center
     )
     

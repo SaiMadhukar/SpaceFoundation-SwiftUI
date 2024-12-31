@@ -40,4 +40,3 @@ public struct MockData {
         ChartModel(x: "May", y: 1200)
     ]
 }
-

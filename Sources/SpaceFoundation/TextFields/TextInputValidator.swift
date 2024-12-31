@@ -6,20 +6,23 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 public enum FieldType: Int {
     case username
     case password
     case phone
+    case email
     case `default`
 }
 
 class TextInputValidator: NSObject {
     private struct Constants {
         static let alphabets: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        static let specialChar: String = "+_@.-"
+        static let specialChar: String = "+_@.-*"
         static let numeric: String = "0123456789"
+        static let passwordSpecialChar: String = "!@#$"
         static let emailRegEx = "[A-Z0-9a-z_%+-]+@[A-Za-z0-9.-]+\\|.[A-Za-z]{2, 64}"
         
         static let numericCharacterSet: CharacterSet = CharacterSet(charactersIn: numeric)
@@ -27,10 +30,19 @@ class TextInputValidator: NSObject {
         static let specialAlphaNumericCharacterSet: CharacterSet = CharacterSet(charactersIn: alphabets + numeric + specialChar)
     }
     
-    func checkValidity(text: String, textFieldType: FieldType) -> Bool {
+    func autoCaptialization(for type: FieldType) -> TextInputAutocapitalization {
+        switch type {
+        case .username:
+            return .words
+        default:
+            return .never
+        }
+    }
+    
+    func checkStateValidations(text: String, textFieldType: FieldType) -> Bool {
         checkMinLength(text, textFieldType: textFieldType) &&
         checkMaxLength(text, textFieldType: textFieldType) &&
-        check(text, textFieldType: textFieldType)
+        checkValidations(text, textFieldType: textFieldType)
     }
     
     func checkMaxLength(_ text: String, textFieldType: FieldType) -> Bool {
@@ -38,7 +50,9 @@ class TextInputValidator: NSObject {
         case .username:
             return text.checkMaxLength(max: 16)
         case .password:
-            return text.checkMaxLength(max: 16)
+            return text.checkMaxLength(max: 32)
+        case .email:
+            return text.checkMaxLength(max: 64)
         case .phone:
             return text.checkMaxLength(max: 10)
         case .default:
@@ -49,9 +63,11 @@ class TextInputValidator: NSObject {
     func checkMinLength(_ text: String, textFieldType: FieldType) -> Bool {
         switch textFieldType {
         case .username:
-            return text.checkMinLength(min: 8)
+            return text.checkMinLength(min: 6)
         case .password:
             return text.checkMinLength(min: 8)
+        case .email:
+            return text.checkMinLength(min: 6)
         case .phone:
             return text.checkMinLength(min: 10)
         case .default:
@@ -59,7 +75,7 @@ class TextInputValidator: NSObject {
         }
     }
     
-    func check(_ text: String, textFieldType: FieldType) -> Bool {
+    func checkAllowedChar(_ text: String, textFieldType: FieldType) -> Bool {
         switch textFieldType {
         case .username:
             return checkSpecialAlphaNumericCharacters(text: text)
@@ -67,6 +83,23 @@ class TextInputValidator: NSObject {
             return checkSpecialAlphaNumericCharacters(text: text)
         case .phone:
             return checkNumeric(text: text)
+        case .email:
+            return checkSpecialAlphaNumericCharacters(text: text)
+        case .default:
+            return true
+        }
+    }
+    
+    func checkValidations(_ text: String, textFieldType: FieldType) -> Bool {
+        switch textFieldType {
+        case .username:
+            return validateUsername(text)
+        case .password:
+            return validatePassword(text: text)
+        case .phone:
+            return validatePhoneNumber(text)
+        case .email:
+            return validateEmail(text: text)
         case .default:
             return true
         }
@@ -76,17 +109,42 @@ class TextInputValidator: NSObject {
 extension TextInputValidator {
     
     func checkNumeric(text: String) -> Bool {
-        let inputCharacterSet: CharacterSet = CharacterSet(charactersIn: text)
-        return Constants.numericCharacterSet.isSuperset(of: inputCharacterSet)
+        let regex = "^[0-9]+$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
     }
     
     func checkSpecialAlphaNumericCharacters(text: String) -> Bool {
-        let inputCharacterSet: CharacterSet = CharacterSet(charactersIn: text)
-        return Constants.specialAlphaNumericCharacterSet.isSuperset(of: inputCharacterSet)
+        let regex = "^[a-zA-Z0-9+_@.-]+$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+    }
+    
+    func checkPasswordSpecialAlphaNumericCharacters(text: String) -> Bool {
+        let regex = "^[a-zA-Z0-9!@#$]+$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
     }
     
     func checkAlphaNumeric(text: String) -> Bool {
-        let inputCharacterSet: CharacterSet = CharacterSet(charactersIn: text)
-        return Constants.alphaNumericCharacterSet.isSuperset(of: inputCharacterSet)
+        let regex = "^[a-zA-Z0-9]+$" // Example regex: only alphanumeric characters
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+    }
+    
+    func validateEmail(text: String) -> Bool {
+        let regex = "[A-Z0-9a-z._%+]+@[A-Za-z0-9.]+\\.[A-Za-z]{2,4}"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+    }
+    
+    func validatePassword(text: String) -> Bool {
+        let regex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$*]).{8,32}$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+    }
+    
+    func validateUsername(_ username: String) -> Bool {
+        let regex = "^[a-zA-Z0-9@_\\-+.]{6,16}$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: username)
+    }
+    
+    func validatePhoneNumber(_ phone: String) -> Bool {
+        let regex = "^[0-9]{10}$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: phone)
     }
 }

@@ -40,6 +40,11 @@ public struct SpacePlayground: View {
     @State var special: SpecialText = SpecialText(font: .body.bold(), foregroundColor: .red.opacity(0.55), backgroundColor: .clear)
     @State private var selectedDate: Date = Date.now
     
+    // Input Fields
+    @State var usernameState: TextInputState = .init(text: "", type: .username, placeholder: "Enter username", scaleEffect: false, showCloseButton: true, reqSecureField: false)
+    @State var email: TextInputState = .init(text: "", type: .email, placeholder: "Enter email", scaleEffect: false, showCloseButton: true, reqSecureField: false)
+    @State var password: TextInputState = .init(text: "", type: .password, placeholder: "Enter password", scaleEffect: false, showCloseButton: false, reqSecureField: true)
+    
     public init() {}
     
     public var body: some View {
@@ -85,8 +90,30 @@ public struct SpacePlayground: View {
             SpaceChart(viewModel: viewModel)
         case .gradientColors:
             gradeintView()
-        default:
-            EmptyView()
+        case .textStyles:
+            textStyles()
+        }
+    }
+    
+    func textStyles() -> some View {
+        VStack {
+            Text("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+                .modifier(FontStyleModifier(category: .headingLarge, weight: .bold))
+            
+            Divider()
+            
+            Text("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+                .modifier(FontStyleModifier(category: .subheading, weight: .bold))
+            
+            Divider()
+            
+            Text("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+                .modifier(FontStyleModifier(category: .bodyMedium, weight: .bold))
+            
+            Divider()
+            
+            Text("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+                .modifier(FontStyleModifier(category: .spaceFont, weight: .regular))
         }
     }
     
@@ -147,11 +174,16 @@ public struct SpacePlayground: View {
         }
     }
     
-    @ViewBuilder
     func textInput() -> some View {
-        VStack {
+        VStack(spacing: 16) {
             Spacer()
-            TextInput(state: playgroundMock.usernameState)
+           
+            TextInput(state: $usernameState)
+
+            TextInput(state: $email)
+            
+            TextInput(state: $password)
+            
             Spacer()
         }
         .background(Color.linearGradient)
@@ -200,5 +232,5 @@ struct PlaygroundMock {
         ChartModel(x: "May", y: 1200)
     ])
     
-    let usernameState: TextInputState = .init(text: "", title: "Username", type: .username, placeholder: "Enter username", scaleEffect: false, showCloaseButton: true, reqSecureField: false)
+    let usernameState: TextInputState = .init(text: "", type: .username, placeholder: "Enter username", scaleEffect: false, showCloseButton: true, reqSecureField: false)
 }

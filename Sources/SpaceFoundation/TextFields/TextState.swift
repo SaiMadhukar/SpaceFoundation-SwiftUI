@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+
 public class TextInputState: ObservableObject {
-    @Published var text: String
-    @Published var isValid: Bool? = nil
+    @Published public var text: String
+    @Published public var isValid: Bool? = nil
     
     var strokeColor: Color {
         if text.isEmpty || isValid == nil {
@@ -27,23 +28,23 @@ public class TextInputState: ObservableObject {
     let reqSecureField: Bool
     let border: Color
     let textColor: Color = .white
-    let title: String
+    let cornerRadius: CGFloat
     
     public init(text: String,
-         title: String,
          type: FieldType = .default,
          placeholder: String,
          scaleEffect: Bool,
-         showCloaseButton: Bool = true,
+         showCloseButton: Bool = true,
          reqSecureField: Bool = false,
+         cornerRadius: CGFloat = 16,
          border: Color = .black)
     {
         self.text = text
-        self.title = title
         self.type = type
         self.placeholder = placeholder
         self.scaleEffect = scaleEffect
         self.reqSecureField = reqSecureField
+        self.cornerRadius = cornerRadius
         self.border = border
     }
 }
