@@ -79,5 +79,5 @@ public struct CircleView: View {
 
 #Preview {
     CircleView()
-        .background(.white)
+        .background(.primary)
 }

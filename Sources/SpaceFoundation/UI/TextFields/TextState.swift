@@ -27,8 +27,9 @@ public class TextInputState: ObservableObject {
     let showCloseButton: Bool = true
     let reqSecureField: Bool
     let border: Color
-    let textColor: Color = .white
+    let textColor: Color
     let cornerRadius: CGFloat
+    let backgroundColor: Color
     
     public init(text: String,
          type: FieldType = .default,
@@ -37,6 +38,8 @@ public class TextInputState: ObservableObject {
          showCloseButton: Bool = true,
          reqSecureField: Bool = false,
          cornerRadius: CGFloat = 16,
+         backgroundColor: Color = SpaceColors.blue50,
+         textColor: Color = .white,
          border: Color = .black)
     {
         self.text = text
@@ -46,6 +49,8 @@ public class TextInputState: ObservableObject {
         self.reqSecureField = reqSecureField
         self.cornerRadius = cornerRadius
         self.border = border
+        self.textColor = textColor
+        self.backgroundColor = backgroundColor
     }
 }
 

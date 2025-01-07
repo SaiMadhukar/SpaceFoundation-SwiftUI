@@ -60,7 +60,7 @@ public struct CalendarView: View {
 
 
 #Preview {
-    let special: SpecialText = SpecialText(font: .body.bold(), foregroundColor: .red.opacity(0.55), backgroundColor: .clear)
+    let special: SpecialText = SpecialText(fontCategory: .headingSmall, foregroundColor: .red.opacity(0.55), backgroundColor: .clear)
     
     VStack {
         let selectedDate: Date = Date.now

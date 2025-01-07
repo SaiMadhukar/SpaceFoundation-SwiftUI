@@ -16,6 +16,7 @@ public enum FontCategory {
         static let notoSansSemiBold = "NotoSans-SemiBold"
         static let notoSansBold = "NotoSans-Bold"
         static let pacifico = "Pacifico-Regular"
+        static let notoSherif = "NotoSerif-Bold"
     }
     
     case pageTitle
@@ -25,6 +26,7 @@ public enum FontCategory {
     case button, primaryButton, secondaryButton, tertiaryButton
     case link
     case spaceFont
+    case amountField
     
     public var size: CGFloat {
         switch self {
@@ -56,12 +58,14 @@ public enum FontCategory {
             return 14
         case .spaceFont:
             return 38
+        case .amountField:
+            return 96
         }
     }
     
     public var fontColor: Color {
         switch self {
-        case .heading, .headingLarge, .headingXLarge, .headingXXLarge, .pageTitle, .headingSmall:
+        case .heading, .headingLarge, .headingXLarge, .headingXXLarge, .pageTitle, .headingSmall, .amountField:
             return .primary
         case .subheading, .subHeadingMedium, .subheadingLarge, .subHeadingXLarge:
             return .secondary
@@ -88,6 +92,8 @@ public enum FontCategory {
             return Font.custom(Constants.notoSans, size: size)
         case .spaceFont:
             return Font.custom(Constants.pacifico, size: size)
+        case .amountField:
+            return Font.custom(Constants.notoSherif, size: size)
         default:
             return Font.custom(Constants.notoSans, size: size)
         }

@@ -20,7 +20,7 @@ final public class SpecialText {
     private var container: AttributeContainer
     
     public init(
-        font: Font = .body,
+        fontCategory: FontCategory = .heading,
         foregroundColor: Color = .primary,
         backgroundColor: Color = .clear,
         underline: Bool = false
@@ -29,8 +29,7 @@ final public class SpecialText {
         container.foregroundColor = foregroundColor
         container.backgroundColor = backgroundColor
         container.underlineColor = underline == false ? Color.clear.UiColor : Color.primary.UiColor
-        container.font = font
-        
+        container.font = fontCategory.font
         self.container = container
     }
     
@@ -39,4 +38,5 @@ final public class SpecialText {
         attributedString.mergeAttributes(container)
         return attributedString
     }
+    
 }

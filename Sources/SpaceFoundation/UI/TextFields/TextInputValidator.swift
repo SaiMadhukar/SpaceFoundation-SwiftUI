@@ -14,6 +14,8 @@ public enum FieldType: Int {
     case password
     case phone
     case email
+    case newPassword
+    case amount
     case `default`
 }
 
@@ -49,12 +51,14 @@ class TextInputValidator: NSObject {
         switch textFieldType {
         case .username:
             return text.checkMaxLength(max: 16)
-        case .password:
+        case .password, .newPassword:
             return text.checkMaxLength(max: 32)
         case .email:
             return text.checkMaxLength(max: 64)
         case .phone:
             return text.checkMaxLength(max: 10)
+        case .amount:
+            return text.checkMaxLength(max: 3)
         case .default:
             return text.checkMaxLength(max: 16)
         }
@@ -64,12 +68,14 @@ class TextInputValidator: NSObject {
         switch textFieldType {
         case .username:
             return text.checkMinLength(min: 6)
-        case .password:
+        case .password, .newPassword:
             return text.checkMinLength(min: 8)
         case .email:
             return text.checkMinLength(min: 6)
         case .phone:
             return text.checkMinLength(min: 10)
+        case .amount:
+            return text.checkMinLength(min: 1)
         case .default:
             return text.checkMinLength(min: 2)
         }
@@ -79,12 +85,14 @@ class TextInputValidator: NSObject {
         switch textFieldType {
         case .username:
             return checkSpecialAlphaNumericCharacters(text: text)
-        case .password:
+        case .password, .newPassword:
             return checkSpecialAlphaNumericCharacters(text: text)
         case .phone:
             return checkNumeric(text: text)
         case .email:
             return checkSpecialAlphaNumericCharacters(text: text)
+        case .amount:
+            return checkNumeric(text: text)
         case .default:
             return true
         }
@@ -94,12 +102,14 @@ class TextInputValidator: NSObject {
         switch textFieldType {
         case .username:
             return validateUsername(text)
-        case .password:
+        case .password, .newPassword:
             return validatePassword(text: text)
         case .phone:
             return validatePhoneNumber(text)
         case .email:
             return validateEmail(text: text)
+        case .amount:
+            return validateAmount(text: text)
         case .default:
             return true
         }
@@ -146,5 +156,11 @@ extension TextInputValidator {
     func validatePhoneNumber(_ phone: String) -> Bool {
         let regex = "^[0-9]{10}$"
         return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: phone)
+    }
+    
+    func validateAmount(text: String) -> Bool {
+        let regex = "^[0-9]+$"
+        guard let double: Double = Double(text), double < 333.0 else { return false }
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
     }
 }

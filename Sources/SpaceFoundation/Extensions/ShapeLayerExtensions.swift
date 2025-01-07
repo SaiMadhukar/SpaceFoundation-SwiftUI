@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-extension Shape {
+public extension Shape {
     /// fills and strokes a shape
-    public func fill<S:ShapeStyle>(
+    func fill<S:ShapeStyle>(
         _ fillContent: S,
         strokeColor: Color,
         stroke : StrokeStyle,
@@ -28,7 +28,7 @@ extension Shape {
         }
     }
     
-    public func fill<S:ShapeStyle>(
+    func fill<S:ShapeStyle>(
         _ fillContent: S,
         strokeGradient: LinearGradient,
         stroke : StrokeStyle,
@@ -46,7 +46,7 @@ extension Shape {
         }
     }
     
-    public func fill<S:ShapeStyle>(
+    func fill<S:ShapeStyle>(
         _ fillContent: S,
         strokeGradient: AngularGradient,
         stroke : StrokeStyle,

@@ -7,7 +7,10 @@
 
 import Foundation
 
-extension String {
+private let cal = Calendar.current
+private let dateFormatter = DateFormatter()
+
+public extension String {
     
     var empty: Self { "" }
     
@@ -27,19 +30,25 @@ extension String {
         let repalce: String = self.replacingOccurrences(of: "$", with: "")
         return repalce.toDouble()
     }
+    
+    func currency() -> String? {
+        let repalce: String = self.replacingOccurrences(of: "$", with: "")
+        return repalce.toDouble()?.toDollars()
+    }
 }
 
-extension Optional {
+public extension Optional {
     
     var isNil: Bool {
         self == nil
     }
 }
 
-extension Double {
+public extension Double {
     
     func toString() -> String {
-        String(self)
+        let parsed: String = String(format: "%.2f", self)
+        return String(parsed)
     }
     
     func toDollars() -> String {
@@ -47,7 +56,7 @@ extension Double {
     }
 }
 
-extension Int {
+public extension Int {
     
     func toString() -> String {
         String(self)
@@ -97,5 +106,46 @@ public extension String {
     
     func checkMinLength(min: Int) -> Bool {
         self.count >= min
+    }
+}
+
+public extension Date {
+    var year: Int {
+        return cal.component(.year, from: self)
+    }
+    var week: Int {
+        return cal.component(.weekOfYear, from: self)
+    }
+    var weekAndYear: DateComponents {
+        return cal.dateComponents([.weekOfYear, .year], from: self)
+    }
+    
+    var startOfWeek: Date {
+        let components = cal.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)
+        return cal.date(from: components)!
+    }
+    
+    var dayFormatted: String? {
+        dateFormatter.dateFormat = "dd-MMM"
+        return dateFormatter.string(from: self)
+    }
+    
+    var monthFormatted: String? {
+        dateFormatter.dateFormat = "MMM"
+        return dateFormatter.string(from: self)
+    }
+    
+    var yearFormatted: String? {
+        dateFormatter.dateFormat = "YYYY"
+        return dateFormatter.string(from: self)
+    }
+}
+
+public extension String {
+    
+    func toDate() -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: self)
     }
 }

@@ -31,13 +31,15 @@ public enum SpaceOpacity: CGFloat {
     case o90 = 0.90
     case o100 = 1.0
     
-    func color(_ color: Color) -> Color {
+    public func color(_ color: Color) -> Color {
         color.opacity(self.rawValue)
     }
 }
 
 public enum loadColors: String {
     
+    case white
+    case primary
     case blue10
     case blue50
     case blue90
@@ -45,7 +47,7 @@ public enum loadColors: String {
     
     case background
     
-    private var uiColor: UIColor? {
+    public var uiColor: UIColor? {
         UIColor(named: self.rawValue)
     }
     
@@ -56,7 +58,6 @@ public enum loadColors: String {
 
 public struct SpaceColors {
     
-    public static let black: Color = Color.black
     public static let black10: Color = SpaceOpacity.o10.color(.black)
     public static let black25: Color = SpaceOpacity.o20.color(.black)
     public static let black30: Color = SpaceOpacity.o30.color(.black)
@@ -77,6 +78,8 @@ public struct SpaceColors {
     public static let blue50: Color = loadColors.blue50.color
     public static let blue90: Color = loadColors.blue90.color
     public static let background: Color = loadColors.background.color
+    public static let white: Color = loadColors.white.color
+    public static let primary: Color = loadColors.primary.color
 }
 
 

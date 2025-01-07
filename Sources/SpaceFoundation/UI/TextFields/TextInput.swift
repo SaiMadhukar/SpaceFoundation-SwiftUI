@@ -17,12 +17,12 @@ public struct TextInput: View {
         static let closeButtonOffset: CGFloat = -32
     }
     
-    @Binding private var state: TextInputState
+    @StateObject private var state: TextInputState
     private var validations: TextInputValidator = TextInputValidator()
     @FocusState private var isFocused: Bool
     
-    public init(state: Binding<TextInputState>) {
-        _state = state
+    public init(state: TextInputState) {
+        _state = StateObject(wrappedValue: state)
     }
     
     public var body: some View {
@@ -43,26 +43,27 @@ public struct TextInput: View {
     }
     
     var customTextField: some View {
-        TextField("", text: $state.text, prompt: Text(state.placeholder).foregroundColor(.white))
+        TextField("", text: $state.text, prompt: Text(state.placeholder).foregroundColor(state.textColor))
             .padding(.horizontal, UIConstants.horizontalPadding)
             .padding(.vertical, UIConstants.verticalPadding)
             .scaleEffect(state.scaleEffect && isFocused ? 1.05 : 1.0)
             .foregroundColor(state.textColor)
-            .background(SpaceColors.blue50)
+            .autocorrectionDisabled()
+            .background(state.backgroundColor)
             .cornerRadius(UIConstants.cornerRadius)
             .focused($isFocused)
             .shadow(color: SpaceColors.black25, radius: 5)
             .textInputAutocapitalization(validations.autoCaptialization(for: state.type))
             .overlay(
                 RoundedRectangle(cornerRadius: UIConstants.cornerRadius)
-                    .stroke(state.strokeColor, lineWidth: 1)
+                    .stroke(state.strokeColor, lineWidth: 2)
             )
             .onChange(of: state.text) { newValue in
+                print("New Value", newValue)
                 if state.text.isEmpty || newValue.isEmpty {
                     state.previousText = ""
                     return
                 }
-                
                 
                 if validations.checkMaxLength(newValue, textFieldType: state.type) &&
                     validations.checkAllowedChar(newValue, textFieldType: state.type) {
@@ -77,19 +78,21 @@ public struct TextInput: View {
     }
     
     var secureTextField: some View {
-        SecureField("", text: $state.text, prompt: Text(state.placeholder).foregroundColor(.white))
+        SecureField("", text: $state.text, prompt: Text(state.placeholder).foregroundColor(state.textColor))
             .scaleEffect(state.scaleEffect && isFocused ? 1.05 : 1.0)
             .foregroundColor(state.textColor)
             .padding(.horizontal, UIConstants.horizontalPadding)
             .padding(.vertical, UIConstants.verticalPadding)
-            .background(SpaceColors.blue50)
+            .background(state.backgroundColor)
             .cornerRadius(UIConstants.cornerRadius)
+            .autocorrectionDisabled()
             .focused($isFocused)
             .shadow(color: SpaceColors.black25, radius: 5)
+            .textContentType(state.type == .newPassword ? .newPassword : .password)
             .textInputAutocapitalization(validations.autoCaptialization(for: state.type))
             .overlay(
                 RoundedRectangle(cornerRadius: UIConstants.cornerRadius)
-                    .stroke(state.strokeColor, lineWidth: 1)
+                    .stroke(state.strokeColor, lineWidth: 2)
             )
             .onChange(of: state.text) { newValue in
                 if state.text.isEmpty || newValue.isEmpty {
@@ -111,8 +114,8 @@ public struct TextInput: View {
     
     var closeButton: some View {
         Button(action: {
-            state.previousText = ""
-            state.text = ""
+            self.state.previousText = ""
+            self.state.text = ""
             print("Close Button Tapped", state.text)
         }) {
             Image(systemName: "xmark")
@@ -128,11 +131,11 @@ public struct TextInput: View {
     VStack {
         Spacer()
         @State var username = TextInputState(text: "", type: .username, placeholder: "Enter Username", scaleEffect: true, showCloseButton: true, reqSecureField: false)
-        TextInput(state: $username)
+        TextInput(state: username)
             .padding(.bottom, 32)
         
         @State var password = TextInputState(text: "", type: .password, placeholder: "Enter Password", scaleEffect: true, showCloseButton: true, reqSecureField: true)
-        TextInput(state: $password)
+        TextInput(state: password)
         Spacer()
     }
     .background(Color.linearGradient)

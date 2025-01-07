@@ -15,6 +15,7 @@ public enum SpaceGradient: String {
     case purpleGoldRadial
     case greenOrangeLinear
     case purpleBlueLinear
+    case blueBlackLinear
     
     var colorMix: [Color] {
         switch self {
@@ -28,6 +29,8 @@ public enum SpaceGradient: String {
             return [Color(hex: "008000", opacity: 0.45), Color(hex: "FFA500", opacity: 0.45)]
         case .purpleBlueLinear:
             return [Color(hex: "5757FB", opacity: 0.45), Color(hex: "2A7FCF", opacity: 0.70)]
+        case .blueBlackLinear:
+            return [Color(hex: "0D0D0D", opacity: 1.0), Color(hex: "2A7FCF", opacity: 0.70)]
         }
     }
     
@@ -51,6 +54,10 @@ public enum SpaceGradient: String {
         let stops: [Gradient.Stop] = zip(colorMix, locationMix).map({ Gradient.Stop(color: $0.0, location: $0.1)})
         
         return RadialGradient(gradient: Gradient(stops: stops), center: .topLeading, startRadius: startRadius, endRadius: endRadius)
+    }
+    
+    public func build() -> some View {
+        rStyle()
     }
     
     public func lStyle(start: UnitPoint = .topLeading,

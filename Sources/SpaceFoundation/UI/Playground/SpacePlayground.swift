@@ -20,6 +20,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case buttonStyles = "Button Styles"
     case textStyles = "Text Styles"
     case inputFields = "Input Fields"
+    case compass = "Compass"
     
     public var name: String {
         self.rawValue
@@ -37,13 +38,15 @@ public struct SpacePlayground: View {
     @State private var selectedTool: Tools?
     
     // Accessory Variables
-    @State var special: SpecialText = SpecialText(font: .body.bold(), foregroundColor: .red.opacity(0.55), backgroundColor: .clear)
+    @State var special: SpecialText = SpecialText(fontCategory: .body, foregroundColor: .red.opacity(0.55), backgroundColor: .clear)
     @State private var selectedDate: Date = Date.now
     
     // Input Fields
     @State var usernameState: TextInputState = .init(text: "", type: .username, placeholder: "Enter username", scaleEffect: false, showCloseButton: true, reqSecureField: false)
     @State var email: TextInputState = .init(text: "", type: .email, placeholder: "Enter email", scaleEffect: false, showCloseButton: true, reqSecureField: false)
     @State var password: TextInputState = .init(text: "", type: .password, placeholder: "Enter password", scaleEffect: false, showCloseButton: false, reqSecureField: true)
+    
+    @State private var value: Double = 50
     
     public init() {}
     
@@ -56,7 +59,7 @@ public struct SpacePlayground: View {
                         label: {
                             Text(tool.name)
                                 .textStyle(.headingSmall)
-                                .foregroundColor(.white)
+                                .foregroundColor(.primary)
                                 .frame(width: 300, height: 40)
                                 .padding()
                                 .background(Color.green.opacity(0.45))
@@ -87,11 +90,13 @@ public struct SpacePlayground: View {
             textInput()
         case .spaceCharts:
             let viewModel: SpaceChartViewModel = SpaceChartViewModel(data: playgroundMock.chartMock)
-            SpaceChart(viewModel: viewModel)
+            SpaceChart(viewModel: viewModel, grouping: .constant(.day))
         case .gradientColors:
             gradeintView()
         case .textStyles:
             textStyles()
+        case .compass:
+            CompassValuePicker(value: $value)
         }
     }
     
@@ -178,11 +183,11 @@ public struct SpacePlayground: View {
         VStack(spacing: 16) {
             Spacer()
            
-            TextInput(state: $usernameState)
+            TextInput(state: usernameState)
 
-            TextInput(state: $email)
+            TextInput(state: email)
             
-            TextInput(state: $password)
+            TextInput(state: password)
             
             Spacer()
         }
@@ -224,12 +229,12 @@ public struct SpacePlayground: View {
 
 struct PlaygroundMock {
     
-    let chartMock: [ChartModel] = .init([
-        ChartModel(x: "Jan", y: 1000),
-        ChartModel(x: "Feb", y: 1600),
-        ChartModel(x: "Mar", y: 2000),
-        ChartModel(x: "Apr", y: 2200),
-        ChartModel(x: "May", y: 1200)
+    let chartMock: [MockChartModel] = .init([
+        MockChartModel(x: "Jan", y: 1000),
+        MockChartModel(x: "Feb", y: 1600),
+        MockChartModel(x: "Mar", y: 2000),
+        MockChartModel(x: "Apr", y: 2200),
+        MockChartModel(x: "May", y: 1200)
     ])
     
     let usernameState: TextInputState = .init(text: "", type: .username, placeholder: "Enter username", scaleEffect: false, showCloseButton: true, reqSecureField: false)
