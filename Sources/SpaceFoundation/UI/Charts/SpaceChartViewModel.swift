@@ -51,7 +51,6 @@ public class SpaceChartViewModel<ChartModel: ChartModelProtocol>: ObservableObje
     }
 }
 
-#if DEBUG
 
 public struct MockChartModel: ChartModelProtocol, Sendable {
     public var id: UUID = UUID()
@@ -79,4 +78,3 @@ public struct MockData {
         MockChartModel(x: "May", y: 1200)
     ]
 }
-#endif

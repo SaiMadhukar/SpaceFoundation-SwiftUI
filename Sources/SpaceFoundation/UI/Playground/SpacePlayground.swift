@@ -220,6 +220,7 @@ public struct SpacePlayground: View {
     }
 }
 
+
 #Preview {
     VStack {
         SpacePlayground()
@@ -239,3 +240,4 @@ struct PlaygroundMock {
     
     let usernameState: TextInputState = .init(text: "", type: .username, placeholder: "Enter username", scaleEffect: false, showCloseButton: true, reqSecureField: false)
 }
+
