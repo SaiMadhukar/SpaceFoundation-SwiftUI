@@ -11,6 +11,10 @@ extension View {
     public func foreground<Overlay: View>(_ overlay: Overlay) -> some View {
         _CustomForeground(overlay: overlay, for: self)
     }
+    
+    public func setNavigationBackButton(action: @escaping () -> Void) -> some View {
+        self.modifier(NavigationBackButtonModifier(action: action))
+    }
 }
 
 private struct _CustomForeground<Content: View, Overlay: View>: View {

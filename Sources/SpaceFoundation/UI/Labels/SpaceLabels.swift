@@ -24,6 +24,20 @@ public struct SpaceLabel: View {
         VStack {
             Label(title, systemImage: configuration.icon ?? "")
                 .labelStyle(SpaceLabelStyle(userConfig: configuration))
+                .frame(height: configuration.height)
         }
+    }
+}
+
+#Preview {
+    
+    VStack {
+        SpaceLabel(title: "Good Morning - Primary", configuration: .primary)
+        
+        SpaceLabel(title: "Good Morning - Secondary", configuration: .secondary)
+        
+        SpaceLabel(title: "Good Morning - Tertiary", configuration: .secondary)
+        
+        SpaceLabel(title: "Good Morning - Plain", configuration: .plain)
     }
 }

@@ -11,16 +11,18 @@ import Foundation
 
 public enum Tools: String, Identifiable, CaseIterable {
     
-    case gradientColors = "Gradient Colors"
     case spaceCharts = "Space Charts"
     case calendar = "Calendar View"
     case luckyPot = "Lukcy Pot"
     case circleView = "Circle View"
     case capsuleView = "Capsule View"
+
+    case compass = "Compass"
+    case inputFields = "Input Fields"
+    case labels = "Labels"
     case buttonStyles = "Button Styles"
     case textStyles = "Text Styles"
-    case inputFields = "Input Fields"
-    case compass = "Compass"
+    case gradientColors = "Gradient Colors"
     
     public var name: String {
         self.rawValue
@@ -29,11 +31,24 @@ public enum Tools: String, Identifiable, CaseIterable {
     public var id: UUID {
         UUID()
     }
+    
+    public var isUIBase: Bool {
+        switch self {
+        case .labels, .inputFields, .textStyles, .buttonStyles, .gradientColors:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 public struct SpacePlayground: View {
     
-    private var all: [Tools] = Tools.allCases
+    @Environment(\.dismiss) var dismiss: DismissAction
+    
+    private var uiComponents = Tools.allCases.filter({ $0.isUIBase == true })
+    private var specialComponents = Tools.allCases.filter({ $0.isUIBase == false })
+    
     private let playgroundMock: PlaygroundMock = PlaygroundMock()
     @State private var selectedTool: Tools?
     
@@ -53,27 +68,61 @@ public struct SpacePlayground: View {
     public var body: some View {
         NavigationStack {
             ScrollView {
-                ForEach(all) { tool in
-                    NavigationLink(
-                        destination: destinationFor(tool: tool),
-                        label: {
-                            Text(tool.name)
-                                .textStyle(.headingSmall)
-                                .foregroundColor(.primary)
-                                .frame(width: 300, height: 40)
-                                .padding()
-                                .background(Color.green.opacity(0.45))
-                                .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                VStack {
+                    Section {
+                        ForEach(specialComponents) { tool in
+                            NavigationLink(
+                                destination: destinationFor(tool: tool),
+                                label: {
+                                    SpaceLabel(title: tool.name, configuration: .primary)
+                                        .frame(width: 300, height: 20)
+                                        .padding()
+                                        .background(Color.orange.opacity(0.45))
+                                        .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                            })
+                        }
+                    } header: {
+                        SpaceLabel(title: "Special Components", configuration: .primary)
+                            .foreground(SpaceGradient.purpleGoldRadial.lStyle())
+                            .frame(width: 300, height: 50, alignment: .leading)
+                            .background(Color.white.opacity(0.45))
+                            .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                    }
+                    
+                    Section(content: {
+                        ForEach(uiComponents) { tool in
+                            NavigationLink(
+                                destination: destinationFor(tool: tool),
+                                label: {
+                                    SpaceLabel(title: tool.name, configuration: .primary)
+                                        .frame(width: 300, height: 20)
+                                        .padding()
+                                        .background(Color.green.opacity(0.45))
+                                        .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                            })
+                        }
+                    }, header: {
+                        SpaceLabel(title: "UI Components", configuration: .primary)
+                            .foreground(SpaceGradient.purpleBlueLinear.lStyle())
+                            .frame(width: 300, height: 50, alignment: .leading)
+                            .background(Color.white.opacity(0.45))
+                            .clipShape(RoundedRectangle(cornerRadius: 20.0))
                     })
                 }
             }
         }
-        .navigationBarTitle("Space Playground")
+        .navigationBarTitleDisplayMode(.automatic)
+        
+        .setNavigationBackButton {
+            dismiss()
+        }
     }
     
     @ViewBuilder
     func destinationFor(tool: Tools) -> some View {
         switch tool {
+        case .labels:
+            spaceLabels()
         case .calendar:
             calendarView()
         case .luckyPot:
@@ -97,6 +146,18 @@ public struct SpacePlayground: View {
             textStyles()
         case .compass:
             CompassValuePicker(value: $value)
+        }
+    }
+    
+    func spaceLabels() -> some View {
+        VStack {
+            SpaceLabel(title: "Good Morning - Primary", configuration: .primary)
+            
+            SpaceLabel(title: "Good Morning - Secondary", configuration: .secondary)
+            
+            SpaceLabel(title: "Good Morning - Tertiary", configuration: .secondary)
+            
+            SpaceLabel(title: "Good Morning - Plain", configuration: .plain)
         }
     }
     

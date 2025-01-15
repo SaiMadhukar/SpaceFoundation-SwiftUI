@@ -95,11 +95,10 @@ public struct SpaceChart<ChartModel: ChartModelProtocol>: View {
     }
 }
 
-#if Debug
 
 #Preview {
     let viewModel: SpaceChartViewModel = SpaceChartViewModel(data: MockData.chartValues)
     @State var grouping: ChartGrouping = .day
     SpaceChart(viewModel: viewModel, grouping: $grouping)
 }
-#endif
+

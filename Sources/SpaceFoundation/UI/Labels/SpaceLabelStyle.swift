@@ -15,12 +15,10 @@ public struct SpaceLabelStyle: LabelStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.title
             .padding()
-            .frame(width: userConfig.width, height: userConfig.height)
-            .foregroundColor(userConfig.textColor)
             .font(userConfig.fontCategory.font)
             .background(userConfig.backgroundColor)
             .cornerRadius(userConfig.cornerRadius)
-            .scaleEffect(action && userConfig.animationEffect ? userConfig.animatedScale : userConfig.standardScale)
+            .foregroundColor(userConfig.textColor)
             .onAppear {
                 action = true
             }
@@ -49,95 +47,82 @@ public struct SpaceLabelConfiguration {
     public static var space:
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
+                fontCategory: FontCategory.spaceFont, textColor: .primary, backgroundColor: .clear,
                 cornerRadius: 10,
                 shadow: false,
                 borderWidth: 1, borderColor: .clear,
-                backgroundColor: .clear,
-                textColor: .primary,
                 animationEffect: true,
                 animation: .snappy(duration: 0.25),
                 standardScale: 1.0,
-                animatedScale: 0.65,
-                fontCategory: FontCategory.spaceFont
+                animatedScale: 0.65
             )
     }
     
     public static var primary:
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
+                fontCategory: FontCategory.body,
+                textColor: .primary,
+                backgroundColor: .clear,
                 cornerRadius: 10,
                 shadow: false,
-                borderWidth: 1, borderColor: .clear,
-                backgroundColor: .clear,
-                textColor: .primary,
-                animationEffect: true,
-                animation: .snappy(duration: 0.25),
-                standardScale: 1.0,
-                animatedScale: 0.65,
-                fontCategory: FontCategory.bodyMedium
+                borderWidth: 1,
+                borderColor: .clear
             )
     }
     
     public static var secondary:
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
-                cornerRadius: 10,
-                shadow: false,
-                borderWidth: 1, borderColor: .clear,
-                backgroundColor: .clear,
+                fontCategory: FontCategory.body,
                 textColor: Color.secondary,
-                animationEffect: true,
-                animation: .snappy(duration: 0.25),
-                standardScale: 1.0,
-                animatedScale: 0.65,
-                fontCategory: FontCategory.body
+                backgroundColor: .clear, cornerRadius: 10,
+                shadow: false,
+                borderWidth: 1,
+                borderColor: .clear
             )
     }
     
     public static var tertiary:
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
+                fontCategory: FontCategory.body,
+                textColor: .orange.opacity(0.80),
+                backgroundColor: .clear,
                 cornerRadius: 10,
                 shadow: false,
-                borderWidth: 1, borderColor: .clear,
-                backgroundColor: .clear,
-                textColor: .orange.opacity(0.80),
-                animationEffect: true,
-                animation: .snappy(duration: 0.25),
-                standardScale: 1.0,
-                animatedScale: 0.65,
-                fontCategory: FontCategory.body
+                borderWidth: 1,
+                borderColor: .clear
             )
     }
     
     public static var plain:
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
+                fontCategory: FontCategory.body,
+                textColor: .primary,
+                backgroundColor: .clear,
                 cornerRadius: 10,
                 shadow: false,
-                borderWidth: 1, borderColor: .clear,
-                backgroundColor: .clear,
-                textColor: .primary,
-                animationEffect: true,
-                animation: .snappy(duration: 0.25),
-                standardScale: 1.0,
-                animatedScale: 1.2,
-                fontCategory: FontCategory.headingLarge
+                borderWidth: 1,
+                borderColor: .clear
             )
     }
     
     public init(
+        fontCategory: FontCategory = FontCategory.body,
+        textColor: Color = .primary,
+        //Background
+        backgroundColor: Color = .blue,
         cornerRadius: CGFloat = 10,
         shadow: Bool = false,
         borderWidth: CGFloat = 1,
         borderColor: Color = .clear,
-        backgroundColor: Color = .blue,
-        textColor: Color = .primary,
+        // Animation
         animationEffect: Bool = true,
         animation: Animation = .snappy(duration: 0.25),
         standardScale: CGFloat = 1.0,
-        animatedScale: CGFloat = 0.65,
-        fontCategory: FontCategory = FontCategory.body
+        animatedScale: CGFloat = 0.65
     ) {
         self.cornerRadius = cornerRadius
         self.shadow = shadow
