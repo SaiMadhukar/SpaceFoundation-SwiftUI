@@ -58,11 +58,11 @@ public enum loadColors: String {
 
 public struct SpaceColors {
     
-    public static let black10: Color = SpaceOpacity.o10.color(.black)
-    public static let black25: Color = SpaceOpacity.o20.color(.black)
-    public static let black30: Color = SpaceOpacity.o30.color(.black)
-    public static let black40: Color = SpaceOpacity.o40.color(.black)
-    public static let black75: Color = SpaceOpacity.o75.color(.black)
+    public static let black10: Color = SpaceOpacity.o10.color(.primary)
+    public static let black25: Color = SpaceOpacity.o20.color(.primary)
+    public static let black30: Color = SpaceOpacity.o30.color(.primary)
+    public static let black40: Color = SpaceOpacity.o40.color(.primary)
+    public static let black75: Color = SpaceOpacity.o75.color(.primary)
     
     public static let green45: Color = SpaceOpacity.o45.color(.green)
     public static let green55: Color = SpaceOpacity.o55.color(.green)

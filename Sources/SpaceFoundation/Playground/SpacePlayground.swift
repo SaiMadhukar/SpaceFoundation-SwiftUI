@@ -16,6 +16,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case luckyPot = "Lukcy Pot"
     case circleView = "Circle View"
     case capsuleView = "Capsule View"
+    
 
     case compass = "Compass"
     case inputFields = "Input Fields"
@@ -23,6 +24,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case buttonStyles = "Button Styles"
     case textStyles = "Text Styles"
     case gradientColors = "Gradient Colors"
+    case spaceSlider = "Slider"
     
     public var name: String {
         self.rawValue
@@ -34,7 +36,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     
     public var isUIBase: Bool {
         switch self {
-        case .labels, .inputFields, .textStyles, .buttonStyles, .gradientColors:
+        case .labels, .inputFields, .textStyles, .buttonStyles, .gradientColors, .spaceSlider:
             return true
         default:
             return false
@@ -51,6 +53,7 @@ public struct SpacePlayground: View {
     
     private let playgroundMock: PlaygroundMock = PlaygroundMock()
     @State private var selectedTool: Tools?
+    @State private var amount: Double = 0.0
     
     // Accessory Variables
     @State var special: SpecialText = SpecialText(fontCategory: .body, foregroundColor: .red.opacity(0.55), backgroundColor: .clear)
@@ -145,7 +148,9 @@ public struct SpacePlayground: View {
         case .textStyles:
             textStyles()
         case .compass:
-            CompassValuePicker(value: $value)
+            Compass(value: $value)
+        case .spaceSlider:
+            SpaceSlider(amount: $amount, maxAmount: 100)
         }
     }
     
