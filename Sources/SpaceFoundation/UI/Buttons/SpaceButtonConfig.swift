@@ -22,8 +22,8 @@ public struct SpaceButtonConfiguration {
     var standardScale: CGFloat
     var animatedScale: CGFloat
     
-    var width: CGFloat = 250
-    var height: CGFloat = 50
+    var width: CGFloat
+    var height: CGFloat
     
     public static var primary:
         SpaceButtonConfiguration {
@@ -116,7 +116,9 @@ public struct SpaceButtonConfiguration {
         animation: Animation = .snappy(duration: 0.25),
         standardScale: CGFloat = 1.0,
         animatedScale: CGFloat = 0.65,
-        fontCategory: FontCategory = .body
+        fontCategory: FontCategory = .body,
+        width: CGFloat = 250,
+        height: CGFloat = 50
     ) {
         self.cornerRadius = cornerRadius
         self.shadow = shadow
@@ -129,5 +131,7 @@ public struct SpaceButtonConfiguration {
         self.standardScale = standardScale
         self.animatedScale = animatedScale
         self.fontCategory = fontCategory
+        self.width = width
+        self.height = height
     }
 }

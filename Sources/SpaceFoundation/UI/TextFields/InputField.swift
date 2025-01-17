@@ -2,12 +2,21 @@
 //  File.swift
 //  SpaceFoundation
 //
+//  Created by Sai Madhukar Somu on 1/16/25.
+//
+
+import Foundation
+
+//
+//  File.swift
+//  SpaceFoundation
+//
 //  Created by Sai Madhukar Somu on 12/31/24.
 //
 
 import SwiftUI
 
-public struct TextInput: View {
+public struct InputField: View {
     
     private struct UIConstants {
         static let horizontalPadding: CGFloat = 24
@@ -27,6 +36,14 @@ public struct TextInput: View {
     
     public var body: some View {
         ZStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                SpaceLabel(title: state.placeholder, configuration: .secondary)
+                    .frame(alignment: .leading)
+                    .padding(.horizontal, 16)
+            }
+            .scaleEffect(isFocused || state.text.count > 0 ? 0.8 : 1)
+            .offset(y: isFocused || state.text.count > 0 ? -30 : 0)
+            
             VStack {
                 if state.reqSecureField {
                     secureTextField
@@ -43,20 +60,6 @@ public struct TextInput: View {
                     }
                 }
             }
-            
-            VStack(alignment: .leading) {
-                Text(state.placeholder)
-                    .spaceFontStyle(category: .subheading)
-                    .frame(alignment: .leading)
-                    .padding(.horizontal, 16)
-            }
-            .background(.white)
-            .scaleEffect( !isFocused && state.text.isEmpty() ? 1 : 0.85)
-            .offset(x: 20,
-                    y: !isFocused && state.text.isEmpty() ? 0 : -24)
-            .onTapGesture {
-                isFocused = true
-            }
         }
         .frame(height: 70)
     }
@@ -69,16 +72,19 @@ public struct TextInput: View {
             .foregroundColor(state.font.fontColor)
             .font(state.font.font)
             .autocorrectionDisabled()
-            .background(state.backgroundColor)
-            .cornerRadius(UIConstants.cornerRadius)
             .focused($isFocused)
+            .shadow(color: SpaceColors.black25, radius: 5)
             .textInputAutocapitalization(validations.autoCaptialization(for: state.type))
-            .overlay(
-                RoundedRectangle(cornerRadius: UIConstants.cornerRadius)
-                    .stroke(state.strokeColor, lineWidth: 2)
-            )
+            .overlay(alignment: .bottom, content: {
+                VStack {
+                    Divider()
+                        .frame(minHeight: 2)
+                        .background(state.strokeColor)
+                }
+                .padding(.horizontal, 16)
+            })
             .onChange(of: state.text) { newValue in
-                print("New Value", newValue)
+              //  print("New Value", newValue)
                 if state.text.isEmpty || newValue.isEmpty {
                     state.previousText = ""
                     return
@@ -100,20 +106,22 @@ public struct TextInput: View {
         SecureField("", text: $state.text)
             .scaleEffect(state.scaleEffect && isFocused ? 1.05 : 1.0)
             .foregroundColor(state.font.fontColor)
-            .font(state.font.font)
             .padding(.horizontal, UIConstants.horizontalPadding)
             .padding(.vertical, UIConstants.verticalPadding)
-            .background(state.backgroundColor)
             .cornerRadius(UIConstants.cornerRadius)
             .autocorrectionDisabled()
             .focused($isFocused)
             .shadow(color: SpaceColors.black25, radius: 5)
             .textContentType(state.type == .newPassword ? .newPassword : .password)
             .textInputAutocapitalization(validations.autoCaptialization(for: state.type))
-            .overlay(
-                RoundedRectangle(cornerRadius: UIConstants.cornerRadius)
-                    .stroke(state.strokeColor, lineWidth: 2)
-            )
+            .overlay(alignment: .bottom, content: {
+                VStack {
+                    Divider()
+                        .frame(minHeight: 2)
+                        .background(state.strokeColor)
+                }
+                .padding(.horizontal, 16)
+            })
             .onChange(of: state.text) { newValue in
                 if state.text.isEmpty || newValue.isEmpty {
                     state.previousText = ""
@@ -136,7 +144,7 @@ public struct TextInput: View {
         Button(action: {
             self.state.previousText = ""
             self.state.text = ""
-            print("Close Button Tapped", state.text)
+         //   print("Close Button Tapped", state.text)
         }) {
             Image(systemName: "xmark")
                 .foregroundColor(SpaceColors.primary)
@@ -151,12 +159,12 @@ public struct TextInput: View {
     VStack {
         Spacer()
         @State var username = TextInputState(text: "", type: .username, placeholder: "Username", scaleEffect: true, showCloseButton: true, reqSecureField: false)
-        TextInput(state: username)
+        InputField(state: username)
             .padding(.bottom, 32)
         
         @State var password = TextInputState(text: "", type: .password, placeholder: "Password", scaleEffect: true, showCloseButton: true, reqSecureField: true)
-        TextInput(state: password)
+        InputField(state: password)
         Spacer()
     }
-    .background(Color.white)
+    .background(Color.linearGradient)
 }

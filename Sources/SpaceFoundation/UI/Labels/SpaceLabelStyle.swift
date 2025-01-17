@@ -71,6 +71,19 @@ public struct SpaceLabelConfiguration {
             )
     }
     
+    public static var heading:
+        SpaceLabelConfiguration {
+            SpaceLabelConfiguration(
+                fontCategory: FontCategory.heading,
+                textColor: .primary,
+                backgroundColor: .clear,
+                cornerRadius: 10,
+                shadow: false,
+                borderWidth: 1,
+                borderColor: .clear
+            )
+    }
+    
     public static var secondary:
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(

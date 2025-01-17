@@ -14,7 +14,7 @@ public class TextInputState: ObservableObject {
     
     var strokeColor: Color {
         if text.isEmpty || isValid == nil {
-            return Color.black.opacity(0.25)
+            return SpaceColors.blue100
         } else {
             return (isValid ?? false) ? Color.green.opacity(0.55) : Color.red.opacity(0.70)
         }
@@ -27,7 +27,7 @@ public class TextInputState: ObservableObject {
     let showCloseButton: Bool = true
     let reqSecureField: Bool
     let border: Color
-    let textColor: Color
+    let font: FontCategory
     let cornerRadius: CGFloat
     let backgroundColor: Color
     
@@ -39,7 +39,7 @@ public class TextInputState: ObservableObject {
          reqSecureField: Bool = false,
          cornerRadius: CGFloat = 16,
          backgroundColor: Color = SpaceColors.blue50,
-         textColor: Color = .white,
+         font: FontCategory = .body,
          border: Color = .black)
     {
         self.text = text
@@ -49,7 +49,7 @@ public class TextInputState: ObservableObject {
         self.reqSecureField = reqSecureField
         self.cornerRadius = cornerRadius
         self.border = border
-        self.textColor = textColor
+        self.font = font
         self.backgroundColor = backgroundColor
     }
 }

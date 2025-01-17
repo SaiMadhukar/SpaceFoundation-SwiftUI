@@ -249,11 +249,11 @@ public struct SpacePlayground: View {
         VStack(spacing: 16) {
             Spacer()
            
-            TextInput(state: usernameState)
+            InputField(state: usernameState)
 
-            TextInput(state: email)
+            InputField(state: email)
             
-            TextInput(state: password)
+            InputField(state: password)
             
             Spacer()
         }

@@ -28,10 +28,11 @@ public struct BottomSheet<Content: View>: View {
     
     public var body: some View {
         VStack {
-            titleView
-            
-            Spacer()
-            
+            if !title.isEmpty() {
+                titleView
+                Spacer()
+            }
+           
             ScrollView {
                 VStack {
                     contentView
