@@ -23,8 +23,10 @@ public struct SpaceLabel: View {
     public var body: some View {
         VStack {
             Label(title, systemImage: configuration.icon ?? "")
+                .lineLimit(0)
                 .labelStyle(SpaceLabelStyle(userConfig: configuration))
                 .frame(height: configuration.height)
+                .multilineTextAlignment(.center)
         }
     }
 }
@@ -32,7 +34,7 @@ public struct SpaceLabel: View {
 #Preview {
     
     VStack {
-        SpaceLabel(title: "Good Morning - Primary", configuration: .primary)
+        SpaceLabel(title: "Good Morning \n- Primary", configuration: .primary)
         
         SpaceLabel(title: "Good Morning - Secondary", configuration: .secondary)
         

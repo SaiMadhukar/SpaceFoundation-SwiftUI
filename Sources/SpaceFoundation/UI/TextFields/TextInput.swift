@@ -46,11 +46,11 @@ public struct TextInput: View {
             
             VStack(alignment: .leading) {
                 Text(state.placeholder)
-                    .spaceFontStyle(category: .subheading)
+                    .spaceFontStyle(category: .subheading, color: SpaceColors.secondary)
                     .frame(alignment: .leading)
                     .padding(.horizontal, 16)
             }
-            .background(.white)
+            .background(SpaceColors.white)
             .scaleEffect( !isFocused && state.text.isEmpty() ? 1 : 0.85)
             .offset(x: 20,
                     y: !isFocused && state.text.isEmpty() ? 0 : -24)

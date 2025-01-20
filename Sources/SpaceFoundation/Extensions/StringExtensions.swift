@@ -54,6 +54,10 @@ public extension Double {
     func toDollars() -> String {
         "$ " + self.toString()
     }
+    
+    var intValue: Int {
+        Int(self)
+    }
 }
 
 public extension Int {

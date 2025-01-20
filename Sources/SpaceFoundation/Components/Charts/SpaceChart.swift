@@ -23,6 +23,7 @@ public struct SpaceChart<ChartModel: ChartModelProtocol>: View {
             Chart {
                 ForEach(viewModel.data) { model in
                     let xAxis: String = model.getXAxis(group: grouping)
+                    
                     BarMark(x: .value("X", xAxis),
                             y: .value("Y", model.yLabel),
                             width: viewModel.barWidth)
@@ -98,7 +99,7 @@ public struct SpaceChart<ChartModel: ChartModelProtocol>: View {
 
 #Preview {
     let viewModel: SpaceChartViewModel = SpaceChartViewModel(data: MockData.chartValues)
-    @State var grouping: ChartGrouping = .day
+    @State var grouping: ChartGrouping = .month
     SpaceChart(viewModel: viewModel, grouping: $grouping)
 }
 

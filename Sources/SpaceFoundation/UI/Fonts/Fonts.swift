@@ -57,7 +57,7 @@ public enum FontCategory {
         case .link:
             return 14
         case .spaceFont:
-            return 38
+            return 30
         case .amountField:
             return 96
         }
@@ -104,5 +104,7 @@ public enum FontCategory {
     VStack {
         SpaceLabel(title: "Space Foundation", configuration: .primary)
         SpaceLabel(title: "Space Foundation", configuration: .secondary)
+        
+        SpaceLabel(title: "Space Foundation", configuration: .space)
     }
 }

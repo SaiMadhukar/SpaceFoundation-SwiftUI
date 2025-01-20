@@ -8,6 +8,42 @@
 import Foundation
 import SwiftUI
 
+public struct GoalSlider: View {
+    
+    private var sliderWidth: Double = 0.0
+    private var foreground: SpaceGradient
+    private var background: Color
+    
+    var amount: Double
+    var target: Double
+    
+    public init(amount: Double,
+                target: Double,
+                foreground: SpaceGradient,
+                background: Color = SpaceColors.black25
+    ) {
+        self.sliderWidth = UIScreen.main.bounds.width - 32 * 2
+        self.foreground = foreground
+        self.background = background
+        self.amount = amount
+        self.target = target
+    }
+    
+    public var body: some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .fill(background)
+                .frame(height: 20)
+            
+            Rectangle()
+                .frame(width: min(CGFloat(amount / target) * sliderWidth, sliderWidth), height: 20)
+                .foreground(foreground.lStyle())
+        }
+        .cornerRadius(10)
+        .padding(.horizontal, 16)
+    }
+}
+
 public struct SpaceSlider: View {
     
     @Environment(\.windowSize) var screenSize: CGSize
@@ -15,11 +51,13 @@ public struct SpaceSlider: View {
     
     private var maxAmount: Double = 0.0
     private var sliderWidth: Double = 0.0
+    private var height: CGFloat = 30
     
-    public init(amount: Binding<Double>, maxAmount: Double = 0.0) {
+    public init(amount: Binding<Double>, maxAmount: Double = 0.0, height: CGFloat = 30) {
         _amount = amount
         self.maxAmount = maxAmount
         self.sliderWidth = UIScreen.main.bounds.width - 16 * 2
+        self.height = height
     }
     
     
@@ -29,19 +67,15 @@ public struct SpaceSlider: View {
     
     
     var sliderView: some View {
-        VStack {
-            Text("Choose an amount")
-                .font(.headline)
-            
-            
+        VStack(alignment: .leading) {
             ZStack(alignment: .leading) {
                 Rectangle()
-                    .fill(SpaceColors.black25)
-                    .frame(height: 20)
+                    .fill(SpaceColors.black10)
+                    .frame(height: 30)
                 
                 Rectangle()
                     .fill(SpaceGradient.purpleBlueLinear.lStyle())
-                    .frame(width: CGFloat(amount / maxAmount) * sliderWidth, height: 20)
+                    .frame(width: min(CGFloat(amount / maxAmount) * sliderWidth, sliderWidth), height: height)
             }
             .cornerRadius(10)
             .gesture(
@@ -51,20 +85,25 @@ public struct SpaceSlider: View {
                         amount = min(max(newAmount, 1), maxAmount)
                     }
             )
-            .padding(.horizontal, 16)
             .drawingGroup()
             
             Text("$\(Int(amount))")
                 .font(.largeTitle)
                 .padding()
+                .frame(alignment: .center)
         }
+        .padding(.horizontal, 16)
     }
 }
 
 
 #Preview {
-    @State var amount: Double = 0.0
+    @State var amount: Double = 40.0
     VStack {
+        
+        GoalSlider(amount: 80, target: 100, foreground: .purpleGoldRadial, background: SpaceColors.black10)
+            
+        
         SpaceSlider(amount: $amount, maxAmount: 500)
     }
 }
