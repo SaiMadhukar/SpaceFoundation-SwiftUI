@@ -13,6 +13,7 @@ import SwiftUI
     fileprivate let defaultBundle: Bundle? = Bundle(url: Bundle.main.url(forResource: "Assets", withExtension: "bundle") ?? .applicationDirectory)
 */
 
+
 public enum SpaceOpacity: CGFloat {
     
     // black
@@ -71,9 +72,19 @@ public struct SpaceColors {
     
     public static let orange45: Color = SpaceOpacity.o45.color(.orange)
     public static let orange55: Color = SpaceOpacity.o55.color(.orange)
+    public static let orange75: Color = SpaceOpacity.o75.color(.orange)
+    
+    public static let yellow55: Color = SpaceOpacity.o45.color(.yellow)
+    public static let yellow75: Color = SpaceOpacity.o75.color(.yellow)
+    public static let yellow90: Color = SpaceOpacity.o90.color(.yellow)
+    
     
     public static let red45: Color = SpaceOpacity.o45.color(.red)
     public static let red55: Color = SpaceOpacity.o55.color(.red)
+    
+    
+    public static let purple45: Color = SpaceOpacity.o45.color(.purple)
+    public static let purple55: Color = SpaceOpacity.o55.color(.purple)
     
     public static let blue100: Color = loadColors.blue100.color
     public static let blue10: Color = loadColors.blue10.color

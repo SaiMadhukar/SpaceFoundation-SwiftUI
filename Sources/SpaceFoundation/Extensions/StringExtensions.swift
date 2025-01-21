@@ -47,7 +47,7 @@ public extension Optional {
 public extension Double {
     
     func toString() -> String {
-        let parsed: String = String(format: "%.2f", self)
+        let parsed: String = "\(self.intValue)"
         return String(parsed)
     }
     

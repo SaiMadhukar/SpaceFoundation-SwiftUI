@@ -11,6 +11,7 @@ import SwiftUI
 public class TextInputState: ObservableObject {
     @Published public var text: String
     @Published public var isValid: Bool? = nil
+    @Published public var showErrors: Bool = false
     
     var strokeColor: Color {
         if text.isEmpty || isValid == nil {
@@ -27,6 +28,7 @@ public class TextInputState: ObservableObject {
     let showCloseButton: Bool = true
     let reqSecureField: Bool
     let border: Color
+    let error: String
     let font: FontCategory
     let cornerRadius: CGFloat
     let backgroundColor: Color
@@ -40,6 +42,7 @@ public class TextInputState: ObservableObject {
          cornerRadius: CGFloat = 16,
          backgroundColor: Color = SpaceColors.blue50,
          font: FontCategory = .body,
+         error: String = "",
          border: Color = .black)
     {
         self.text = text
@@ -50,6 +53,7 @@ public class TextInputState: ObservableObject {
         self.cornerRadius = cornerRadius
         self.border = border
         self.font = font
+        self.error = error
         self.backgroundColor = backgroundColor
     }
 }

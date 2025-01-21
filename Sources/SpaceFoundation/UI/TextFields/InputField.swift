@@ -6,14 +6,6 @@
 //
 
 import Foundation
-
-//
-//  File.swift
-//  SpaceFoundation
-//
-//  Created by Sai Madhukar Somu on 12/31/24.
-//
-
 import SwiftUI
 
 public struct InputField: View {

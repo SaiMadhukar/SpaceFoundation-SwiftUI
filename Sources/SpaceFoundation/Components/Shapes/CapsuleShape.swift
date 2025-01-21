@@ -37,17 +37,36 @@ public struct CapsuleButton: View {
     private var title: String
     private var action: (() -> Void)?
     @State var clickedState: Bool = false
+    private var color: Color?
+    private var gradient: SpaceGradient?
+    private var fontCategory: FontCategory
     
-    public init(title: String, action: (() -> Void)? = nil) {
+    public init(
+        title: String,
+        fontCategory: FontCategory = .body,
+        fillColor: Color? = nil,
+        fillGradient: SpaceGradient? = nil,
+        action: (() -> Void)? = nil
+    ) {
         self.title = title
         self.action = action
+        self.color = fillColor
+        self.gradient = fillGradient
+        self.fontCategory = fontCategory
     }
     
     public var body: some View {
+        if gradient != nil {
+            gradientCirlce
+        } else {
+            plainCirlce
+        }
+    }
+    
+    private var plainCirlce: some View {
         Circle()
-           .fill(LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .top, endPoint: .bottom))
-           .scaleEffect(clickedState ? 1 : 0.65)
-            .frame(width: 200, height: 200)
+            .fill(color ?? .blue)
+            .scaleEffect(clickedState ? 1.25 : 1)
             .onLongPressGesture(minimumDuration: 0.1, pressing: { pressing in
                 withAnimation(.snappy(duration: 0.25)) {
                     clickedState = pressing
@@ -56,15 +75,39 @@ public struct CapsuleButton: View {
             }, perform: {})
             .overlay(
                 Text(title)
-                    .textStyle(.heading)
-                    .scaleEffect(clickedState ? 1 : 0.65)
+                    .textStyle(
+                        fontCategory,
+                        weight: .semibold
+                    )
+                    .scaleEffect(clickedState ? 1.1 : 1)
+            )
+    }
+    
+    private var gradientCirlce: some View {
+        Circle()
+            .fill(gradient?.lStyle() ?? SpaceGradient.purpleBlueLinear.lStyle())
+            .scaleEffect(clickedState ? 1.25 : 1)
+            .onLongPressGesture(minimumDuration: 0.1, pressing: { pressing in
+                withAnimation(.snappy(duration: 0.25)) {
+                    clickedState = pressing
+                }
+                action?()
+            }, perform: {})
+            .overlay(
+                Text(title)
+                    .textStyle(
+                        fontCategory,
+                        weight: .semibold
+                    )
+                    .scaleEffect(clickedState ? 1.1 : 1)
             )
     }
 }
 
 
 #Preview {
-    CapsuleButton(title: "Good2") {
+    CapsuleButton(title: "Good2", fontCategory: .body) {
         print("Good2")
     }
+    .frame(width: 100, height: 100)
 }

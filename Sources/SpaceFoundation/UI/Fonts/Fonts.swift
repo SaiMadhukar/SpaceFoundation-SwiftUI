@@ -66,17 +66,17 @@ public enum FontCategory {
     public var fontColor: Color {
         switch self {
         case .heading, .headingLarge, .headingXLarge, .headingXXLarge, .pageTitle, .headingSmall, .amountField:
-            return .primary
+            return SpaceColors.primary
         case .subheading, .subHeadingMedium, .subheadingLarge, .subHeadingXLarge:
-            return .secondary
+            return SpaceColors.secondary
         case .caption:
-            return .secondary
+            return SpaceColors.secondary
         case .body, .bodyMedium, .bodyLarge, .bodyXLarge:
-            return .primary
+            return SpaceColors.primary
         case .button, .primaryButton, .secondaryButton, .tertiaryButton:
-            return .primary
+            return SpaceColors.primary
         case .spaceFont:
-            return .primary
+            return SpaceColors.primary
         case .link:
             return .green.opacity(0.75)
         }

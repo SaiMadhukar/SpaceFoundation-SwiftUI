@@ -10,7 +10,7 @@ import SwiftUICore
 
 extension Text {
     
-    @MainActor public func textStyle(_ textStyle: FontCategory, weight: Font.Weight = .regular, color: Color = .clear) -> some View {
+    @MainActor public func textStyle(_ textStyle: FontCategory, weight: Font.Weight = .regular, color: Color = Color.primary) -> some View {
         self.modifier(FontStyleModifier(category: textStyle, weight: weight, color: color))
     }
 }

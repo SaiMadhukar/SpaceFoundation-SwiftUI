@@ -16,6 +16,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case luckyPot = "Lukcy Pot"
     case circleView = "Circle View"
     case capsuleView = "Capsule View"
+    case progtessView = "Progress View"
     
 
     case compass = "Compass"
@@ -151,6 +152,8 @@ public struct SpacePlayground: View {
             Compass(value: $value)
         case .spaceSlider:
             SpaceSlider(amount: $amount, maxAmount: 100)
+        case .progtessView:
+            SpaceProgressView()
         }
     }
     

@@ -32,7 +32,7 @@ public struct SpaceButtonConfiguration {
                 shadow: false,
                 borderWidth: 1, borderColor: .clear,
                 backgroundColor: SpaceColors.blue100,
-                textColor: SpaceColors.primary,
+                textColor: SpaceColors.white,
                 animationEffect: true,
                 animation: .snappy(duration: 0.25),
                 standardScale: 1.0,
@@ -49,6 +49,22 @@ public struct SpaceButtonConfiguration {
                 borderWidth: 1, borderColor: .clear,
                 backgroundColor: SpaceOpacity.o75.color(.green),
                 textColor: SpaceColors.primary,
+                animationEffect: true,
+                animation: .snappy(duration: 0.25),
+                standardScale: 1.0,
+                animatedScale: 0.65,
+                fontCategory: .subHeadingMedium
+            )
+    }
+    
+    public static var space:
+        SpaceButtonConfiguration {
+            .init(
+                cornerRadius: 24,
+                shadow: false,
+                borderWidth: 1, borderColor: .clear,
+                backgroundColor: .clear,
+                textColor: SpaceColors.white,
                 animationEffect: true,
                 animation: .snappy(duration: 0.25),
                 standardScale: 1.0,

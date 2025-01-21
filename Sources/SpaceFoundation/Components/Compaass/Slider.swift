@@ -13,6 +13,7 @@ public struct GoalSlider: View {
     private var sliderWidth: Double = 0.0
     private var foreground: SpaceGradient
     private var background: Color
+    private var cornerRadius: CGFloat = 10
     
     var amount: Double
     var target: Double
@@ -31,16 +32,15 @@ public struct GoalSlider: View {
     
     public var body: some View {
         ZStack(alignment: .leading) {
-            Rectangle()
+            RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(background)
                 .frame(height: 20)
+                
             
-            Rectangle()
+            RoundedRectangle(cornerRadius: cornerRadius)
                 .frame(width: min(CGFloat(amount / target) * sliderWidth, sliderWidth), height: 20)
                 .foreground(foreground.lStyle())
         }
-        .cornerRadius(10)
-        .padding(.horizontal, 16)
     }
 }
 
@@ -102,6 +102,7 @@ public struct SpaceSlider: View {
     VStack {
         
         GoalSlider(amount: 80, target: 100, foreground: .purpleGoldRadial, background: SpaceColors.black10)
+            .padding(.horizontal, 32)
             
         
         SpaceSlider(amount: $amount, maxAmount: 500)

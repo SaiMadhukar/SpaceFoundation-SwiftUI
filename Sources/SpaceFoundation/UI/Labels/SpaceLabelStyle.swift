@@ -47,7 +47,8 @@ public struct SpaceLabelConfiguration {
     public static var space:
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
-                fontCategory: FontCategory.spaceFont, textColor: .primary, backgroundColor: .clear,
+                fontCategory: FontCategory.spaceFont,
+                textColor: SpaceColors.primary, backgroundColor: .clear,
                 cornerRadius: 10,
                 shadow: false,
                 borderWidth: 1, borderColor: .clear,
@@ -75,7 +76,7 @@ public struct SpaceLabelConfiguration {
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
                 fontCategory: FontCategory.heading,
-                textColor: .primary,
+                textColor: SpaceColors.primary,
                 backgroundColor: .clear,
                 cornerRadius: 10,
                 shadow: false,
@@ -88,7 +89,7 @@ public struct SpaceLabelConfiguration {
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
                 fontCategory: FontCategory.body,
-                textColor: Color.secondary,
+                textColor: SpaceColors.secondary,
                 backgroundColor: .clear, cornerRadius: 10,
                 shadow: false,
                 borderWidth: 1,
@@ -113,7 +114,7 @@ public struct SpaceLabelConfiguration {
         SpaceLabelConfiguration {
             SpaceLabelConfiguration(
                 fontCategory: FontCategory.body,
-                textColor: .primary,
+                textColor: SpaceColors.primary,
                 backgroundColor: .clear,
                 cornerRadius: 10,
                 shadow: false,
