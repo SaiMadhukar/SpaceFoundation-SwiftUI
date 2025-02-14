@@ -12,20 +12,18 @@ public enum HorizontalSwipeDirection: String {
 }
 
 extension View {
-    public func addHorizontalGesture(direction: HorizontalSwipeDirection, action: @escaping () -> Void) -> some View {
-        self.modifier(HorizontalGestureRecognizer(reqDirection: direction, action: action))
+    public func addHorizontalGesture(action: @escaping (_ direction: HorizontalSwipeDirection) -> Void) -> some View {
+        self.modifier(HorizontalGestureRecognizer(action: action))
     }
 }
 
 public struct HorizontalGestureRecognizer: ViewModifier {
     
-    init(reqDirection: HorizontalSwipeDirection, action: (@escaping () -> Void)) {
-        self.reqDirection = reqDirection
+    init(action: (@escaping (_ direction: HorizontalSwipeDirection) -> Void)) {
         self.action = action
     }
     
-    var reqDirection: HorizontalSwipeDirection
-    var action: (() -> Void)?
+    var action: ((_ direction: HorizontalSwipeDirection) -> Void)?
     
     public func body(content: Content) -> some View {
         var direction: HorizontalSwipeDirection?
@@ -35,8 +33,8 @@ public struct HorizontalGestureRecognizer: ViewModifier {
                     direction = detect(startLocation: value.startLocation, current: value.location)
                 })
                     .onEnded({ _ in
-                        if direction == .some(reqDirection) {
-                            action?()
+                        if let direction = direction {
+                            action?(direction)
                         }
                     })
             )

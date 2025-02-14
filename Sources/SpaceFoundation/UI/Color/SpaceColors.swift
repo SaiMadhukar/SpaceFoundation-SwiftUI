@@ -18,7 +18,7 @@ public enum SpaceOpacity: CGFloat {
     
     // black
     case o10 = 0.1
-    case o20 = 0.2
+    case o20 = 0.20
     case o25 = 0.25
     case o30 = 0.30
     case o40 = 0.40
@@ -67,6 +67,11 @@ public struct SpaceColors {
     public static let black40: Color = SpaceOpacity.o40.color(.primary)
     public static let black75: Color = SpaceOpacity.o75.color(.primary)
     
+    public static let gray10: Color = SpaceOpacity.o10.color(.gray)
+    public static let gray20: Color = SpaceOpacity.o20.color(.gray)
+    public static let gray25: Color = SpaceOpacity.o25.color(.gray)
+    public static let gray65: Color = SpaceOpacity.o60.color(.gray)
+    
     public static let green45: Color = SpaceOpacity.o45.color(.green)
     public static let green55: Color = SpaceOpacity.o55.color(.green)
     
@@ -90,6 +95,7 @@ public struct SpaceColors {
     public static let blue10: Color = loadColors.blue10.color
     public static let blue50: Color = loadColors.blue50.color
     public static let blue90: Color = loadColors.blue90.color
+    
     public static let background: Color = loadColors.background.color
     public static let white: Color = loadColors.white.color
     public static let primary: Color = loadColors.primary.color

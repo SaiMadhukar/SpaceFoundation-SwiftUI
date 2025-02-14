@@ -16,3 +16,16 @@ public enum RequestError: Error {
     case internalServerError
     case NoData
 }
+
+
+public enum RealmError: Error {
+    case objectNotFound
+    case failedToSave
+    case failedToDelete
+    case failedToUpdate
+    case failedToFetch
+    case unknownError
+    case alreadyExisits
+    case realmNotInitialized
+    case missingReqFields
+}

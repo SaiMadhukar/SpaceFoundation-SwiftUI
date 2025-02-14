@@ -17,6 +17,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case circleView = "Circle View"
     case capsuleView = "Capsule View"
     case progtessView = "Progress View"
+    case spacebubbleView = "Space Bubble progress view"
     
 
     case compass = "Compass"
@@ -53,7 +54,6 @@ public struct SpacePlayground: View {
     private var specialComponents = Tools.allCases.filter({ $0.isUIBase == false })
     
     private let playgroundMock: PlaygroundMock = PlaygroundMock()
-    @State private var selectedTool: Tools?
     @State private var amount: Double = 0.0
     
     // Accessory Variables
@@ -154,6 +154,8 @@ public struct SpacePlayground: View {
             SpaceSlider(amount: $amount, maxAmount: 100)
         case .progtessView:
             SpaceProgressView()
+        case .spacebubbleView:
+            SpaceBubbleProgressView()
         }
     }
     
