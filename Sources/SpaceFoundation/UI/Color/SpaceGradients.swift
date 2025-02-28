@@ -16,6 +16,7 @@ public enum SpaceGradient: String {
     case greenOrangeLinear
     case purpleBlueLinear
     case blueBlackLinear
+    case creamLinear
     
     var colorMix: [Color] {
         switch self {
@@ -31,6 +32,8 @@ public enum SpaceGradient: String {
             return [Color(hex: "5757FB", opacity: 0.45), Color(hex: "2A7FCF", opacity: 0.70)]
         case .blueBlackLinear:
             return [Color(hex: "0D0D0D", opacity: 1.0), Color(hex: "2A7FCF", opacity: 0.70)]
+        case .creamLinear:
+            return [SpaceColors.cream, SpaceColors.cream]
         }
     }
     

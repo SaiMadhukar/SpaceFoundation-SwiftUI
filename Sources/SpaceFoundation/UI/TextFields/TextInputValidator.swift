@@ -16,6 +16,7 @@ public enum FieldType: Int {
     case email
     case newPassword
     case amount
+    case singleDigitNumber
     case `default`
 }
 
@@ -59,6 +60,8 @@ class TextInputValidator: NSObject {
             return text.checkMaxLength(max: 10)
         case .amount:
             return text.checkMaxLength(max: 3)
+        case .singleDigitNumber:
+            return text.checkMaxLength(max: 2)
         case .default:
             return text.checkMaxLength(max: 16)
         }
@@ -76,6 +79,8 @@ class TextInputValidator: NSObject {
             return text.checkMinLength(min: 10)
         case .amount:
             return text.checkMinLength(min: 1)
+        case .singleDigitNumber:
+            return text.checkMaxLength(max: 1)
         case .default:
             return text.checkMinLength(min: 2)
         }
@@ -92,6 +97,8 @@ class TextInputValidator: NSObject {
         case .email:
             return checkSpecialAlphaNumericCharacters(text: text)
         case .amount:
+            return checkNumeric(text: text)
+        case .singleDigitNumber:
             return checkNumeric(text: text)
         case .default:
             return true
@@ -110,6 +117,8 @@ class TextInputValidator: NSObject {
             return validateEmail(text: text)
         case .amount:
             return validateAmount(text: text)
+        case .singleDigitNumber:
+            return validateSingleDigit(text: text)
         case .default:
             return true
         }
@@ -162,5 +171,10 @@ extension TextInputValidator {
         let regex = "^[0-9]+$"
         guard let double: Double = Double(text), double < 333.0 else { return false }
         return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: text)
+    }
+    
+    func validateSingleDigit(text: String) -> Bool {
+        guard let intValue: Int = Int(text) else { return false }
+        return text.count == 1
     }
 }

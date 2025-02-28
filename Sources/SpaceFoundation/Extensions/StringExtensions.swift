@@ -143,6 +143,12 @@ public extension Date {
         dateFormatter.dateFormat = "YYYY"
         return dateFormatter.string(from: self)
     }
+    
+    var monthYearFormatted: String? {
+        dateFormatter.dateFormat = "MMM YYYY"
+        return dateFormatter.string(from: self)
+    }
+    
 }
 
 public extension String {

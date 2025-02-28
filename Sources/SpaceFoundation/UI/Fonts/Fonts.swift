@@ -50,14 +50,16 @@ public enum FontCategory {
             return 16
         case .caption:
             return 12
-        case .body, .bodyMedium, .bodyLarge, .bodyXLarge:
+        case .body:
+            return 14
+        case .bodyMedium, .bodyLarge, .bodyXLarge:
             return 16
         case .button, .primaryButton, .secondaryButton, .tertiaryButton:
             return 16
         case .link:
             return 14
         case .spaceFont:
-            return 30
+            return 26
         case .amountField:
             return 96
         }

@@ -15,6 +15,18 @@ extension View {
     public func setNavigationBackButton(action: @escaping () -> Void) -> some View {
         self.modifier(NavigationBackButtonModifier(action: action))
     }
+    
+    public func showExpandButton(isExpanded: Binding<Bool>, action: (() -> Void)? = nil) -> some View {
+        Button {
+            withAnimation(.snappy(duration: 0.2)) {
+                isExpanded.wrappedValue.toggle()
+            }
+        } label: {
+            Image(systemName: isExpanded.wrappedValue ? "chevron.up" : "chevron.down")
+                .foreground(SpaceColors.white)
+        }
+        .frame(width: 32, height: 32, alignment: .bottom)
+    }
 }
 
 private struct _CustomForeground<Content: View, Overlay: View>: View {

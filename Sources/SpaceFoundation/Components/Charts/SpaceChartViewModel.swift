@@ -8,8 +8,22 @@
 import Foundation
 import Charts
 
-public enum ChartGrouping {
-    case day, month, year
+public enum ChartGrouping: String, SwitchOptions {
+    
+    case day = "Day"
+    case month = "Month"
+    case year = "Year"
+    
+    public var id: Int {
+        switch self {
+        case .day:
+            return 1
+        case .month:
+            return 2
+        case .year:
+            return 3
+        }
+    }
 }
 
 public protocol ChartModelProtocol: Identifiable {

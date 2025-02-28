@@ -22,6 +22,7 @@ public enum RealmError: Error {
     case objectNotFound
     case failedToSave
     case failedToDelete
+    case failedToGetMutableReference
     case failedToUpdate
     case failedToFetch
     case unknownError

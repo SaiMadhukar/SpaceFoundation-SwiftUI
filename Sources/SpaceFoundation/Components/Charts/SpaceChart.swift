@@ -62,7 +62,7 @@ public struct SpaceChart<ChartModel: ChartModelProtocol>: View {
                         }
                     }
                 }
-            SpaceToggle(binding: $grouping)
+            SpaceSwitchBar(selection: $grouping, options: ChartGrouping.allCases)
         }
         .onChange(of: grouping) { newValue in
             viewModel.selectedRowMark = nil

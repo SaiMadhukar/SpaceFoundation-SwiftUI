@@ -49,6 +49,7 @@ public enum loadColors: String {
     case background
     case secondary
     case primary
+    case cream
     
     public var uiColor: UIColor? {
         UIColor(named: self.rawValue)
@@ -74,6 +75,7 @@ public struct SpaceColors {
     
     public static let green45: Color = SpaceOpacity.o45.color(.green)
     public static let green55: Color = SpaceOpacity.o55.color(.green)
+    public static let green75: Color = SpaceOpacity.o75.color(.green)
     
     public static let orange45: Color = SpaceOpacity.o45.color(.orange)
     public static let orange55: Color = SpaceOpacity.o55.color(.orange)
@@ -100,6 +102,7 @@ public struct SpaceColors {
     public static let white: Color = loadColors.white.color
     public static let primary: Color = loadColors.primary.color
     public static let secondary: Color = loadColors.secondary.color
+    public static let cream: Color = loadColors.cream.color
 }
 
 

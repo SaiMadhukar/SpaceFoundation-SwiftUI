@@ -47,7 +47,7 @@ public struct SpaceButtonConfiguration {
                 cornerRadius: 24,
                 shadow: false,
                 borderWidth: 1, borderColor: .clear,
-                backgroundColor: SpaceOpacity.o75.color(.green),
+                backgroundColor: SpaceColors.green75,
                 textColor: SpaceColors.primary,
                 animationEffect: true,
                 animation: .snappy(duration: 0.25),

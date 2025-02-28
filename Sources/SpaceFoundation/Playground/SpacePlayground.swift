@@ -18,7 +18,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case capsuleView = "Capsule View"
     case progtessView = "Progress View"
     case spacebubbleView = "Space Bubble progress view"
-    
+    case switchToggleBar = "Switch Toggle Bar"
 
     case compass = "Compass"
     case inputFields = "Input Fields"
@@ -27,6 +27,7 @@ public enum Tools: String, Identifiable, CaseIterable {
     case textStyles = "Text Styles"
     case gradientColors = "Gradient Colors"
     case spaceSlider = "Slider"
+    
     
     public var name: String {
         self.rawValue
@@ -64,6 +65,7 @@ public struct SpacePlayground: View {
     @State var usernameState: TextInputState = .init(text: "", type: .username, placeholder: "Enter username", scaleEffect: false, showCloseButton: true, reqSecureField: false)
     @State var email: TextInputState = .init(text: "", type: .email, placeholder: "Enter email", scaleEffect: false, showCloseButton: true, reqSecureField: false)
     @State var password: TextInputState = .init(text: "", type: .password, placeholder: "Enter password", scaleEffect: false, showCloseButton: false, reqSecureField: true)
+    @State var daySelection: DateRanges = .day
     
     @State private var value: Double = 50
     
@@ -156,7 +158,13 @@ public struct SpacePlayground: View {
             SpaceProgressView()
         case .spacebubbleView:
             SpaceBubbleProgressView()
+        case .switchToggleBar:
+            switchToggleBar()
         }
+    }
+    
+    func switchToggleBar() -> some View {
+        SpaceSwitchBar(selection: $daySelection, options: DateRanges.allCases)
     }
     
     func spaceLabels() -> some View {
