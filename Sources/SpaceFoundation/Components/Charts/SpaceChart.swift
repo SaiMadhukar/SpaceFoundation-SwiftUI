@@ -21,7 +21,7 @@ public struct SpaceChart<ChartModel: ChartModelProtocol>: View {
     public var body: some View {
         VStack(spacing: 16) {
             Chart {
-                ForEach(viewModel.data) { model in
+                ForEach(data) { model in
                     let xAxis: String = model.getXAxis(group: grouping)
                     
                     BarMark(x: .value("X", xAxis),
@@ -66,6 +66,19 @@ public struct SpaceChart<ChartModel: ChartModelProtocol>: View {
         }
         .onChange(of: grouping) { newValue in
             viewModel.selectedRowMark = nil
+        }
+    }
+    
+    private var data: [ChartModel] {
+        switch grouping {
+        case .day:
+            let today = Date.now
+            let last7: Date = today.addDays(n: -7)
+            let last7Days: [ChartModel] = viewModel.data.filter({ $0.creationDate >= last7
+                && $0.creationDate <= today })
+            return last7Days
+        default:
+            return viewModel.data
         }
     }
     

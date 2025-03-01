@@ -30,6 +30,7 @@ public protocol ChartModelProtocol: Identifiable {
     var xLabel: String { get }
     var yLabel: Double { get }
     
+    var creationDate: Date { get }
     var date: String? { get }
     var monthDate: String? { get }
     var yearDate: String? { get }
@@ -67,18 +68,22 @@ public class SpaceChartViewModel<ChartModel: ChartModelProtocol>: ObservableObje
 
 
 public struct MockChartModel: ChartModelProtocol, Sendable {
+    
     public var id: UUID = UUID()
     
     public let xLabel: String
     public let yLabel: Double
     
+    public var fullDate: String?
     public var date: String?
     public var monthDate: String?
     public var yearDate: String?
+    public var creationDate: Date
     
-    public init(x: String, y: Double) {
+    public init(x: String, y: Double, creationDate: Date = Date()) {
         self.xLabel = x
         self.yLabel = y
+        self.creationDate = creationDate
     }
 }
 
