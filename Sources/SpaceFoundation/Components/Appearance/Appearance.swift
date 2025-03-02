@@ -13,8 +13,6 @@ public protocol SpaceAppearance: Identifiable, CaseIterable, Equatable {
     var id: Int { get }
 }
 
-
-
 public struct SpaceAppearanceBar<I: SpaceAppearance>: View {
     
     private var appearance: [I]
