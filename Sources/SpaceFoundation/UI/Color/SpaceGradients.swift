@@ -18,6 +18,10 @@ public enum SpaceGradient: String {
     case blueBlackLinear
     case creamLinear
     
+    case redYellowRadial
+    case redPinkRadial
+    case greenlightRadial
+    
     var colorMix: [Color] {
         switch self {
         case .blueLightRadial:
@@ -32,6 +36,12 @@ public enum SpaceGradient: String {
             return [Color(hex: "5757FB", opacity: 0.45), Color(hex: "2A7FCF", opacity: 0.70)]
         case .blueBlackLinear:
             return [Color(hex: "0D0D0D", opacity: 1.0), Color(hex: "2A7FCF", opacity: 0.70)]
+        case .greenlightRadial:
+            return [Color(hex: "9FE69F"), Color(hex: "5BB290")]
+        case .redPinkRadial:
+            return [Color(hex: "C28492"), Color(hex: "C6696F"), Color(hex: "D24767")]
+        case .redYellowRadial:
+            return [Color(hex: "FFBE46", opacity: 0.45), Color(hex: "FF2F00", opacity: 0.55)]
         case .creamLinear:
             return [SpaceColors.cream, SpaceColors.cream]
         }
@@ -44,6 +54,8 @@ public enum SpaceGradient: String {
         case .goldLightRadial:
             return [0, 0.43, 1]
         case .purpleGoldRadial:
+            return [0, 0.31, 1.00]
+        case .redPinkRadial:
             return [0, 0.31, 1.00]
         default:
             return [0, 1.00]
