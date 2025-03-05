@@ -27,6 +27,29 @@ extension View {
         }
         .frame(width: 32, height: 32, alignment: .bottom)
     }
+    
+    @ViewBuilder public func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if (condition) {
+            transform(self)
+        } else {
+            self
+        }
+    }
+    
+    @ViewBuilder public func `ifInline`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
+        if condition() {
+            transform(self)
+        } else {
+            self
+        }
+    }
+    
+    @ViewBuilder public func myPresentation(device: DeviceType, detents: Set<PresentationDetent>) -> some View {
+        if device == .iPhone {
+            self
+                .presentationDetents(detents)
+        }
+    }
 }
 
 private struct _CustomForeground<Content: View, Overlay: View>: View {

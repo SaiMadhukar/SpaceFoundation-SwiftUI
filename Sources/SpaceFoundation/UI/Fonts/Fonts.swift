@@ -26,6 +26,7 @@ public enum FontCategory {
     case button, primaryButton, secondaryButton, tertiaryButton
     case link
     case spaceFont
+    case spaceFontSmall
     case amountField
     
     public var size: CGFloat {
@@ -60,6 +61,8 @@ public enum FontCategory {
             return 14
         case .spaceFont:
             return 26
+        case .spaceFontSmall:
+            return 22
         case .amountField:
             return 96
         }
@@ -77,7 +80,7 @@ public enum FontCategory {
             return SpaceColors.primary
         case .button, .primaryButton, .secondaryButton, .tertiaryButton:
             return SpaceColors.primary
-        case .spaceFont:
+        case .spaceFont, .spaceFontSmall:
             return SpaceColors.primary
         case .link:
             return .green.opacity(0.75)
@@ -92,7 +95,7 @@ public enum FontCategory {
             return Font.custom(Constants.notoSansSemiBold, size: size)
         case .body, .bodyMedium, .bodyLarge, .bodyXLarge:
             return Font.custom(Constants.notoSans, size: size)
-        case .spaceFont:
+        case .spaceFont, .spaceFontSmall:
             return Font.custom(Constants.pacifico, size: size)
         case .amountField:
             return Font.custom(Constants.notoSherif, size: size)

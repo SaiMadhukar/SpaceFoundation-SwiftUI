@@ -7,8 +7,12 @@
 
 import Foundation
 import UIKit
-import SwiftUICore
+import SwiftUI
 
+public enum DeviceType {
+    case iPhone
+    case iPad
+}
 
 public struct MainWindowSizeKey: @preconcurrency EnvironmentKey {
      @MainActor public static let defaultValue: CGSize = UIScreen.main.bounds.size
