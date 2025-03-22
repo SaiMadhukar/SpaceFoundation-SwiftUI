@@ -22,8 +22,8 @@ public struct SpaceButtonConfiguration {
     var standardScale: CGFloat
     var animatedScale: CGFloat
     
-    var width: CGFloat
-    var height: CGFloat
+    public var width: CGFloat
+    public var height: CGFloat
     
     public static var primary:
         SpaceButtonConfiguration {

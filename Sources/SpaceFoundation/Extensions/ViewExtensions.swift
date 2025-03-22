@@ -48,6 +48,10 @@ extension View {
         if device == .iPhone {
             self
                 .presentationDetents(detents)
+                .presentationDragIndicator(.visible)
+        } else {
+            self
+                .presentationDragIndicator(.visible)
         }
     }
 }
