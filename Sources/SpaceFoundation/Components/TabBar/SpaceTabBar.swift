@@ -8,35 +8,35 @@
 import Foundation
 import SwiftUI
 
-enum SpaceTabItem: String, CaseIterable, Identifiable, CustomStringConvertible, Equatable {
+public enum SpaceTabItem: String, CaseIterable, Identifiable, CustomStringConvertible, Equatable {
     case home = "house.fill"
     case saved = "heart.fill"
     case profile = "person.fill"
     
-    var id: String {
+    public var id: String {
         return self.rawValue
     }
     
-    var description: String {
+    public var description: String {
         return self.rawValue
     }
     
-    static func == (lhs: SpaceTabItem, rhs: SpaceTabItem) -> Bool {
+    public static func == (lhs: SpaceTabItem, rhs: SpaceTabItem) -> Bool {
         return lhs.id == rhs.id
     }
 }
 
-struct SpaceTabBar<CustomTab: Identifiable & CustomStringConvertible & Equatable>: View {
+public struct SpaceTabBar<CustomTab: Identifiable & CustomStringConvertible & Equatable>: View {
     @Binding var selectedTab: CustomTab
     @State var tabValues: [CustomTab]
     @State var animated: Bool = false
     
-    init(reqTabs: [CustomTab], selectedTab: Binding<CustomTab>) {
+    public init(reqTabs: [CustomTab], selectedTab: Binding<CustomTab>) {
         self.tabValues = reqTabs
         _selectedTab = selectedTab
     }
     
-    var body: some View {
+    public var body: some View {
         HStack {
             ForEach(tabValues, id: \.id) { tab in
                 Spacer()
