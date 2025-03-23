@@ -49,11 +49,10 @@ public struct SpaceTabBar<CustomTab: Identifiable & CustomStringConvertible & Eq
                     VStack {
                         Image(systemName: tab.description)
                             .font(.system(size: 24))
-                            .scaleEffect(animated && selectedTab == tab ? 1.2 : 1)
+                            .scaleEffect(animated && selectedTab == tab ? 0.90 : 1)
                             .shadow(radius: animated && selectedTab == tab ? 4 : 0)
                             .foregroundColor(selectedTab == tab ? SpaceColors.yellow90 : SpaceColors.white)
                             .padding(8)
-                            .background(selectedTab == tab ? SpaceColors.primary : SpaceColors.white)
                             .clipShape(Circle())
                     }
                 }
