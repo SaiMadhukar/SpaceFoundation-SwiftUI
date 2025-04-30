@@ -49,21 +49,25 @@ class TextInputValidator: NSObject {
     }
     
     func checkMaxLength(_ text: String, textFieldType: FieldType) -> Bool {
+        text.checkMaxLength(max: getMaxLength(for: textFieldType))
+    }
+    
+    func getMaxLength(for textFieldType: FieldType) -> Int {
         switch textFieldType {
         case .username:
-            return text.checkMaxLength(max: 16)
+            return 18
         case .password, .newPassword:
-            return text.checkMaxLength(max: 32)
+            return 32
         case .email:
-            return text.checkMaxLength(max: 64)
+            return 64
         case .phone:
-            return text.checkMaxLength(max: 10)
+            return 10
         case .amount:
-            return text.checkMaxLength(max: 3)
+            return 3
         case .singleDigitNumber:
-            return text.checkMaxLength(max: 2)
+            return 2
         case .default:
-            return text.checkMaxLength(max: 16)
+            return 16
         }
     }
     

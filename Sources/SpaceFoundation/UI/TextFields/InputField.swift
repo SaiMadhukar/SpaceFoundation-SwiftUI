@@ -12,10 +12,12 @@ public struct InputField: View {
     
     private struct UIConstants {
         static let horizontalPadding: CGFloat = 24
-        static let verticalPadding: CGFloat = 10
+        static let verticalPadding: CGFloat = 12
         static let cornerRadius: CGFloat = 16
         static let shadowRadius: CGFloat = 5
         static let closeButtonOffset: CGFloat = -32
+        static let labelOffset: CGFloat = -25
+        static let fieldHeight: CGFloat = 56
     }
     
     @StateObject private var state: TextInputState
@@ -27,40 +29,40 @@ public struct InputField: View {
     }
     
     public var body: some View {
-        ZStack(alignment: .leading) {
-            VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
+            ZStack(alignment: .leading) {
                 SpaceLabel(title: state.placeholder, configuration: .secondary)
-                    .frame(alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 16)
-            }
-            .scaleEffect(isFocused || state.text.count > 0 ? 0.8 : 1)
-            .offset(y: isFocused || state.text.count > 0 ? -30 : 0)
-            
-            VStack {
-                if state.reqSecureField {
-                    secureTextField
-                        .scaleEffect(isFocused ? 1.0 : 0.96)
-                } else {
-                    HStack(spacing: -16) {
-                        customTextField
-                            .scaleEffect(isFocused ? 1.0 : 0.96)
-                        if state.showCloseButton {
-                            closeButton
-                                .opacity(isFocused ? 1 : 0)
-                                .frame(alignment: .trailing)
+                    .offset(y: isFocused || state.text.count > 0 ? UIConstants.labelOffset : 0)
+                    .animation(.spring(response: 0.2, dampingFraction: 0.7), value: isFocused)
+                    .animation(.spring(response: 0.2, dampingFraction: 0.7), value: state.text)
+                
+                VStack(spacing: 0) {
+                    if state.reqSecureField {
+                        secureTextField
+                    } else {
+                        HStack(spacing: -16) {
+                            customTextField
+                            if state.showCloseButton {
+                                closeButton
+                                    .opacity(isFocused ? 1 : 0)
+                                    .frame(alignment: .trailing)
+                            }
                         }
                     }
                 }
             }
         }
-        .frame(height: 70)
+        .frame(height: UIConstants.fieldHeight)
+        .padding(.vertical, 8)
     }
     
     var customTextField: some View {
         TextField("", text: $state.text)
             .padding(.horizontal, UIConstants.horizontalPadding)
             .padding(.vertical, UIConstants.verticalPadding)
-            .scaleEffect(state.scaleEffect && isFocused ? 1.05 : 1.0)
+            .scaleEffect(state.scaleEffect && isFocused ? 1.02 : 1.0)
             .foregroundColor(state.font.fontColor)
             .font(state.font.font)
             .autocorrectionDisabled()
@@ -76,7 +78,6 @@ public struct InputField: View {
                 .padding(.horizontal, 16)
             })
             .onChange(of: state.text) { newValue in
-              //  print("New Value", newValue)
                 if state.text.isEmpty || newValue.isEmpty {
                     state.previousText = ""
                     return
@@ -96,7 +97,7 @@ public struct InputField: View {
     
     var secureTextField: some View {
         SecureField("", text: $state.text)
-            .scaleEffect(state.scaleEffect && isFocused ? 1.05 : 1.0)
+            .scaleEffect(state.scaleEffect && isFocused ? 1.02 : 1.0)
             .foregroundColor(state.font.fontColor)
             .padding(.horizontal, UIConstants.horizontalPadding)
             .padding(.vertical, UIConstants.verticalPadding)
@@ -160,3 +161,4 @@ public struct InputField: View {
     }
     .background(Color.linearGradient)
 }
+

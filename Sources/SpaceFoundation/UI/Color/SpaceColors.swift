@@ -13,7 +13,6 @@ import SwiftUI
     fileprivate let defaultBundle: Bundle? = Bundle(url: Bundle.main.url(forResource: "Assets", withExtension: "bundle") ?? .applicationDirectory)
 */
 
-
 public enum SpaceOpacity: CGFloat {
     
     // black

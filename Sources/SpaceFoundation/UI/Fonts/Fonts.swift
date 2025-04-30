@@ -11,10 +11,10 @@ import SwiftUI
 public enum FontCategory {
     
     private struct Constants {
-        static let notoSans = "NotoSans-Regular"
-        static let notoSansMedium = "NotoSans-Medium"
-        static let notoSansSemiBold = "NotoSans-SemiBold"
-        static let notoSansBold = "NotoSans-Bold"
+        static let notoSans = "App-Regular"
+        static let notoSansMedium = "App-Medium"
+        static let notoSansSemiBold = "App-SemiBold"
+        static let notoSansBold = "App-Bold"
         static let pacifico = "Pacifico-Regular"
         static let notoSherif = "NotoSerif-Bold"
     }
