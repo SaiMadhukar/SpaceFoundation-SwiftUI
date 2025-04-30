@@ -136,7 +136,7 @@ public struct TextInput: View {
         Button(action: {
             self.state.previousText = ""
             self.state.text = ""
-            print("Close Button Tapped", state.text)
+            self.isFocused = false
         }) {
             Image(systemName: "xmark")
                 .foregroundColor(SpaceColors.primary)

@@ -49,10 +49,12 @@ public enum loadColors: String {
     case secondary
     case primary
     case cream
+    case textInputPrimary
+    case textInputHeader
     
     public var uiColor: UIColor? {
         UIColor(named: self.rawValue)
-    }
+    }	
     
     public var color: Color {
         Color(uiColor: uiColor ?? .clear)
@@ -102,6 +104,9 @@ public struct SpaceColors {
     public static let primary: Color = loadColors.primary.color
     public static let secondary: Color = loadColors.secondary.color
     public static let cream: Color = loadColors.cream.color
+    
+    public static let textInputPrimary: Color = loadColors.textInputPrimary.color
+    public static let textInputHeader: Color = loadColors.textInputHeader.color
 }
 
 
