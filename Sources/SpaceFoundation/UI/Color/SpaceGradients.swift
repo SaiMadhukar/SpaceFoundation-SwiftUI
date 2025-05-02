@@ -15,6 +15,7 @@ public enum SpaceGradient: String {
     case purpleGoldRadial
     case greenOrangeLinear
     case purpleBlueLinear
+    case purpleBlueOriginal
     case blueBlackLinear
     case creamLinear
     
@@ -30,6 +31,8 @@ public enum SpaceGradient: String {
             return [Color(hex: "EAF079"), Color(hex: "E6CB5F"), Color(hex: "F0AB79")]
         case .purpleGoldRadial:
             return [Color(hex: "EF7D2B"), Color(hex: "C6696F"), Color(hex: "6A46CE")]
+        case .purpleBlueOriginal:
+            return [Color.purple, Color.blue]
         case .greenOrangeLinear:
             return [Color(hex: "008000", opacity: 0.45), Color(hex: "FFA500", opacity: 0.45)]
         case .purpleBlueLinear:
