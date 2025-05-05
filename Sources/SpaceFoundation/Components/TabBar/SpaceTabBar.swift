@@ -41,10 +41,15 @@ public struct SpaceTabBar<CustomTab: Identifiable & RawRepresentable & CustomStr
     @State var tabValues: [CustomTab]
     @State var animated: Bool = false
     @State var height: CGFloat
+    private var selectionColor: Color = SpaceColors.orange75
     
-    public init(reqTabs: [CustomTab], selectedTab: Binding<CustomTab>, height: CGFloat = 44) {
+    public init(reqTabs: [CustomTab],
+                selectedTab: Binding<CustomTab>,
+                selectionColor: Color = SpaceColors.orange75,
+                height: CGFloat = 44) {
         self.tabValues = reqTabs
         _selectedTab = selectedTab
+        self.selectionColor = selectionColor
         self.height = height
     }
     
@@ -64,7 +69,7 @@ public struct SpaceTabBar<CustomTab: Identifiable & RawRepresentable & CustomStr
                         .frame(width: 18, height: 18)
                         .scaleEffect(animated && selectedTab == tab ? 1.05 : 1)
                         .shadow(radius: animated && selectedTab == tab ? 4 : 0)
-                        .foregroundColor(selectedTab == tab ? SpaceColors.yellow75 : SpaceColors.white)
+                        .foregroundColor(selectedTab == tab ? selectionColor : SpaceColors.white)
                 }
                 Spacer()
             }

@@ -8,10 +8,15 @@
 import Foundation
 import SwiftUI
 
-struct GrowSpaceProgressAnimation: View {
+struct SpaceProgressAnimation: View {
     @State private var progress: CGFloat = 0.0
-       private let animationDuration: Double = 2.0
-       private let text = "G r o w S p a c e"
+    private let animationDuration: Double = 2.0
+    
+    private let text: String
+    
+    init(text: String = "G r o w S p a c e") {
+        self.text = text
+    }
        
        var body: some View {
            GeometryReader { geometry in
@@ -62,6 +67,6 @@ struct GrowSpaceProgressAnimation: View {
 
 
 #Preview {
-    GrowSpaceProgressAnimation()
+    SpaceProgressAnimation()
         .frame(width: 200, height: 200)
 }

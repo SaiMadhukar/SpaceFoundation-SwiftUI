@@ -20,7 +20,7 @@ public struct ElasticHeaderView<HeaderContent: View, BodyContent: View>: View {
     
     public init(headerFixedHeight: CGFloat = 100,
          bottomFixedSpace: CGFloat = 50,
-         backgroundColor: Color = SpaceColors.yellow90,
+         backgroundColor: Color = SpaceColors.orange75,
          @ViewBuilder header: () -> HeaderContent,
          @ViewBuilder contentView: () -> BodyContent) {
         

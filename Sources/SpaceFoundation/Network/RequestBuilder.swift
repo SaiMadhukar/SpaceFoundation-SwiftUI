@@ -18,7 +18,6 @@ public class RequestBuilder {
     private struct RequestParams {
         static let contentType = "application/json"
         static let userAgent = "iOS"
-        static let appName = "GrowSpace"
         static let userAgentKey = "User-Agent"
         static let appNameKey = "AppName"
         static let contentTypeKey = "Content-Type"
@@ -26,12 +25,12 @@ public class RequestBuilder {
     
     private var request: URLRequest
     
-    public init(url: URL) {
+    public init(url: URL, appName: String = "GrowSpace") {
         self.request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue(RequestParams.contentType, forHTTPHeaderField: RequestParams.contentTypeKey)
         request.setValue(RequestParams.userAgent, forHTTPHeaderField: RequestParams.userAgentKey)
-        request.setValue(RequestParams.appName, forHTTPHeaderField: RequestParams.appNameKey)
+        request.setValue(appName, forHTTPHeaderField: RequestParams.appNameKey)
     }
     
     
