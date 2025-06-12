@@ -53,7 +53,7 @@ public struct CircleView: View {
     private var strokePath: some View {
         Circle()
             .stroke(.white, lineWidth: 32)
-            .shadow(color: Color.black.opacity(0.20), radius: 10, x: 0, y: 0)
+            .shadow(color: SpaceColors.primary.opacity(0.20), radius: 10, x: 0, y: 0)
             .frame(width: width, height: height)
     }
     
@@ -71,7 +71,7 @@ public struct CircleView: View {
         
         Circle()
             .stroke(.orange.opacity(0.5), lineWidth: 32)
-            .shadow(color: Color.black.opacity(0.20), radius: 10, x: 0, y: 0)
+            .shadow(color: SpaceColors.primary.opacity(0.20), radius: 10, x: 0, y: 0)
             .frame(width: width, height: height)
     }
 }

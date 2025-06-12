@@ -12,7 +12,8 @@ public struct ElasticHeaderView<HeaderContent: View, BodyContent: View>: View {
     
     private let headerFixedHeight: CGFloat
     private let bottomFixedSpace: CGFloat
-    private let backgroundColor: Color
+    private let headerColor: Color
+    private let contentColor: Color
     private let header: HeaderContent
     private let contentView: BodyContent
     
@@ -20,13 +21,15 @@ public struct ElasticHeaderView<HeaderContent: View, BodyContent: View>: View {
     
     public init(headerFixedHeight: CGFloat = 100,
          bottomFixedSpace: CGFloat = 50,
-         backgroundColor: Color = SpaceColors.orange75,
+         headerColor: Color = SpaceColors.orange75,
+         contentColor: Color = SpaceColors.white,
          @ViewBuilder header: () -> HeaderContent,
          @ViewBuilder contentView: () -> BodyContent) {
         
         self.headerFixedHeight = headerFixedHeight
         self.bottomFixedSpace = bottomFixedSpace
-        self.backgroundColor = backgroundColor
+        self.headerColor = headerColor
+        self.contentColor = contentColor
         self.header = header()
         self.contentView = contentView()
     }
@@ -52,7 +55,7 @@ public struct ElasticHeaderView<HeaderContent: View, BodyContent: View>: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(
                                     LinearGradient(gradient: Gradient(colors: [
-                                                                SpaceColors.white, SpaceColors.white.opacity(10),
+                                        contentColor, contentColor.opacity(0.10),
                                                                 .clear, .clear]),
                                                    startPoint: .top,
                                                    endPoint: .bottom)
@@ -61,15 +64,15 @@ public struct ElasticHeaderView<HeaderContent: View, BodyContent: View>: View {
                         }
                     }
                 }
-                .background(SpaceColors.white)
+                .background(contentColor)
                 .cornerRadius(20, corners: [.topLeft, .topRight])
                 .shadow(radius: 4, x: 0, y: -4)
                 
                 Rectangle()
-                    .fill(SpaceColors.white)
+                    .fill(SpaceColors.primary)
                     .frame(height: bottomFixedSpace)
             }
         }
-        .background(backgroundColor.ignoresSafeArea(.all, edges: .top))
+        .background(headerColor.ignoresSafeArea(.all, edges: .top))
     }
 }

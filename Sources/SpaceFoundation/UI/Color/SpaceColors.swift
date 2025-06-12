@@ -17,6 +17,8 @@ public enum SpaceOpacity: CGFloat {
     
     // black
     case o10 = 0.1
+    case o15 = 0.15
+    case o18 = 0.18
     case o20 = 0.20
     case o25 = 0.25
     case o30 = 0.30

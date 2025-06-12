@@ -78,7 +78,7 @@ public struct SpaceTabBar<CustomTab: Identifiable & RawRepresentable & CustomStr
         .background(Color.primary)
         .cornerRadius(32)
         .padding(.horizontal, 24)
-        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
+        .shadow(color: SpaceColors.primary.opacity(0.2), radius: 10, x: 0, y: 5)
     }
 }
 

@@ -13,15 +13,17 @@ public struct SpaceScrollView<Content: View>: View {
     @Binding var offset: CGFloat
     private let content: Content
     private let outerScrollView: String = "OuterScrollView"
+    private var showScrollIndicators: Bool
     
-    public init(offset: Binding<CGFloat>, @ViewBuilder content: () -> Content) {
+    public init(offset: Binding<CGFloat>, showScrollIndicators: Bool = true, @ViewBuilder content: () -> Content) {
         self.content = content()
         _offset = offset
+        self.showScrollIndicators = showScrollIndicators
     }
     
     
     public var body: some View {
-        ScrollView() {
+        ScrollView(showsIndicators: showScrollIndicators) {
             content
                 .background(
                     GeometryReader { proxy in
@@ -30,6 +32,7 @@ public struct SpaceScrollView<Content: View>: View {
                     }
                 )
         }
+        .padding(.zero)
         .coordinateSpace(name: outerScrollView)
         .onPreferenceChange(ScrollOffsetPreferenceKey.self) { newOffset in
             self.offset = newOffset
